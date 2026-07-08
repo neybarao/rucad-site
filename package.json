@@ -1,0 +1,36 @@
+{
+  "name": "rucad-site",
+  "version": "1.0.0",
+  "description": "Novo site institucional da Rucad Engenharia. Substitui rucadengenharia.com.br, com foco em SEO orgânico e na nova identidade de marca.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neybarao/rucad-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neybarao/rucad-site/issues"
+  },
+  "homepage": "https://github.com/neybarao/rucad-site#readme",
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}
