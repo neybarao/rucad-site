@@ -1,0 +1,67 @@
+:root {
+  /* Blue */
+  --blue-900:#020913; --blue-800:#062141; --blue-700:#0B386F; --blue-600:#10509E;
+  --blue-500:#1467CC; --blue-400:#2A80EA; --blue-300:#589CF0; --blue-200:#86B7F3;
+  --blue-100:#B5D3F8; --blue-50:#E3EEFC;
+  /* Yellow */
+  --yellow-900:#242000; --yellow-800:#4D4400; --yellow-700:#7A6D00; --yellow-600:#A89700;
+  --yellow-500:#CCB900; --yellow-400:#EDD700; --yellow-300:#FDF24E; --yellow-200:#FEF57C;
+  --yellow-100:#FEF9B0; --yellow-50:#FFFDE8;
+  /* Gray */
+  --gray-900:#020913; --gray-800:#373C41; --gray-700:#5E666F; --gray-600:#86919E;
+  --gray-500:#B8C1CC; --gray-400:#DEE4EA; --gray-300:#E3E8EE; --gray-200:#EEF0F3;
+  --gray-100:#F3F6F8; --gray-50:#F7F9FC;
+
+  /* Roles */
+  --brand-primary: var(--blue-800);
+  --brand-secondary: var(--yellow-300);
+  --brand-tertiary: var(--gray-600);
+  --bg: #ffffff;
+  --bg-dark: var(--blue-800);
+  --text: var(--blue-800);
+  --text-muted: var(--gray-700);
+  --text-on-dark: #ffffff;
+  --line: rgba(6,33,65,0.08);
+
+  /* Type */
+  --font-heading: var(--font-anek), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+
+  /* Spacing / layout */
+  --wrap: 1200px;
+  --gutter: 24px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  /* Motion tokens */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.2s;
+  --dur: 0.4s;
+  --dur-slow: 0.7s;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.1; margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, video { max-width: 100%; display: block; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Animation base: elements marked .reveal start hidden only once JS marks the
+   document ready, so no-JS users still see everything. */
+.js-anim .reveal { opacity: 0; transform: translateY(24px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-anim .reveal { opacity: 1 !important; transform: none !important; }
+}
