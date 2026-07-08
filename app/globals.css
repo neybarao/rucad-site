@@ -94,12 +94,12 @@ img, video { max-width: 100%; display: block; }
 .header {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
   transition: background var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease), padding var(--dur) var(--ease);
-  background: transparent; padding: 20px 0;
+  background: transparent; padding: 4rem 0;
 }
 .header--scrolled {
   background: rgba(10, 23, 37, 0.72);
   backdrop-filter: blur(24px);
-  padding: 12px 0;
+  padding: 1.5rem 0;
 }
 .header__inner { display: flex; align-items: center; justify-content: space-between; }
 .header__logo { display: inline-flex; align-items: center; }
@@ -129,18 +129,21 @@ img, video { max-width: 100%; display: block; }
 /* ================================== Hero =================================== */
 .hero {
   position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
   padding: 8.75rem 0 6rem;
   background: var(--bg-dark);
   color: var(--text-on-dark);
   overflow: hidden;
 }
-.hero--compact { padding-top: 2.5rem; }
+.hero--compact { min-height: 0; padding-top: 2.5rem; }
 .hero--image { background-size: cover; background-position: center; background-repeat: no-repeat; }
 .hero__overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(10, 23, 37, 0.6) 0, rgba(10, 23, 37, 0.6) 12.5rem, #06101B 100%);
 }
-.hero__inner { position: relative; z-index: 2; }
+.hero__inner { position: relative; z-index: 2; width: 100%; }
 .hero__kicker { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.25rem; font-size: 0.875rem; color: var(--brand-secondary); margin-bottom: 1rem; }
 .hero__title { font-family: var(--font-heading); font-weight: 500; font-size: 4rem; line-height: 1.05; color: #FFFFFF; max-width: 18ch; }
 .hero__subtitle { font-family: var(--font-body); font-weight: 400; font-size: 1rem; line-height: 1.6; color: #F5F6F6; max-width: 48ch; margin-top: 1.25rem; }
