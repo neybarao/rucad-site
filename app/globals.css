@@ -111,7 +111,8 @@ img, video { max-width: 100%; display: block; }
 /* ================================= Footer ================================== */
 .footer { background: var(--bg-dark); color: var(--text-on-dark); padding: 72px 0 32px; }
 .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
-.footer nav { display: flex; flex-direction: column; gap: 10px; }
+.footer nav, .footer__contact { display: flex; flex-direction: column; gap: 10px; }
+.footer__contact a, .footer__contact p { width: fit-content; }
 .footer h4 { color: var(--brand-secondary); margin-bottom: 6px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
 .footer a, .footer p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0; }
 .footer a:hover { color: #fff; }

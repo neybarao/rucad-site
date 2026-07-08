@@ -23,7 +23,7 @@ export default function Footer() {
           <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </nav>
-        <div>
+        <div className="footer__contact">
           <h4>Contato</h4>
           <a href={`tel:+${site.phoneRaw}`}>{site.phoneDisplay}</a>
           <a href={`mailto:${site.email}`}>{site.email}</a>
