@@ -21,9 +21,9 @@ export default function Home() {
   return (
     <main>
       <Hero
-        kicker="ENGENHARIA ELÉTRICA"
         title="Sua demanda, nossa solução."
         subtitle="Projeto, execução e laudo com responsável técnico definido desde o primeiro dia."
+        bgImage={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg.png`}
         actions={<>
           <WhatsAppButton />
           <Link className="btn btn--ghost" href="/servicos">Ver serviços</Link>

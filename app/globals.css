@@ -127,20 +127,31 @@ img, video { max-width: 100%; display: block; }
 @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
 
 /* ================================== Hero =================================== */
-.hero { padding: 140px 0 96px; }
-.hero--compact { padding-top: 40px; }
-.hero--dark { background: var(--bg-dark); color: var(--text-on-dark); }
-.hero__kicker { font-family: var(--font-heading); font-weight: 600; letter-spacing: 4px; font-size: 14px; color: var(--brand-secondary); margin-bottom: 16px; }
-.hero__title { font-size: clamp(40px, 7vw, 84px); font-weight: 700; max-width: 14ch; }
-.hero__subtitle { font-size: clamp(18px, 2.2vw, 22px); color: rgba(255,255,255,0.82); max-width: 52ch; margin-top: 20px; }
-.hero__actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+.hero {
+  position: relative;
+  padding: 8.75rem 0 6rem;
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  overflow: hidden;
+}
+.hero--compact { padding-top: 2.5rem; }
+.hero--image { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.hero__overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(10, 23, 37, 0.6) 0, rgba(10, 23, 37, 0.6) 12.5rem, #06101B 100%);
+}
+.hero__inner { position: relative; z-index: 2; }
+.hero__kicker { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.25rem; font-size: 0.875rem; color: var(--brand-secondary); margin-bottom: 1rem; }
+.hero__title { font-family: var(--font-heading); font-weight: 500; font-size: 4rem; line-height: 1.05; color: #FFFFFF; max-width: 18ch; }
+.hero__subtitle { font-family: var(--font-body); font-weight: 400; font-size: 1rem; line-height: 1.6; color: #F5F6F6; max-width: 48ch; margin-top: 1.25rem; }
+.hero__actions { display: flex; gap: 0.875rem; margin-top: 2rem; flex-wrap: wrap; }
 
 /* ================================= Stats =================================== */
-.statsbar { background: var(--blue-900); color: #fff; }
-.statsbar__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 40px 0; }
-.stat__value { font-family: var(--font-heading); font-weight: 700; font-size: clamp(28px, 4vw, 44px); color: var(--brand-secondary); }
-.stat__label { color: rgba(255,255,255,0.75); font-size: 15px; margin-top: 4px; }
-@media (max-width: 860px) { .statsbar__grid { grid-template-columns: 1fr 1fr; } }
+.statsbar { background: #06101B; color: #8FE5FF; }
+.statsbar__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 2.5rem 0; }
+.stat__value { font-family: var(--font-heading); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); color: #8FE5FF; }
+.stat__label { color: #8FE5FF; opacity: 0.75; font-size: 0.9375rem; margin-top: 0.25rem; }
+@media (max-width: 53.75rem) { .statsbar__grid { grid-template-columns: 1fr 1fr; } }
 
 /* ================================ Pillars ================================== */
 .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
