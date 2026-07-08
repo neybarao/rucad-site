@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Anek_Latin, DM_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AnimationProvider from "./components/AnimationProvider";
+import JsonLd from "./components/JsonLd";
+import { site } from "@/content/site-data";
 
 const anek = Anek_Latin({
   subsets: ["latin"],
@@ -34,7 +39,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${anek.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: site.name,
+          url: site.domain,
+          telephone: `+${site.phoneRaw}`,
+          email: site.email,
+          areaServed: "BR",
+          slogan: site.slogan,
+          sameAs: [site.social.instagram, site.social.linkedin],
+        }} />
+        <AnimationProvider />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
