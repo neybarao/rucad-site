@@ -6,11 +6,12 @@ type Props = {
   subtitle: string;
   actions?: React.ReactNode;
   dark?: boolean;
+  compactTop?: boolean;
 };
 
-export default function Hero({ kicker, title, subtitle, actions, dark = true }: Props) {
+export default function Hero({ kicker, title, subtitle, actions, dark = true, compactTop = false }: Props) {
   return (
-    <section className={`hero ${dark ? "hero--dark" : ""}`}>
+    <section className={`hero ${dark ? "hero--dark" : ""} ${compactTop ? "hero--compact" : ""}`}>
       <div className="wrap">
         <Reveal stagger>
           <p className="hero__kicker reveal">{kicker}</p>

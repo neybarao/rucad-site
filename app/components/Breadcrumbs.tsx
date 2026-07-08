@@ -16,14 +16,16 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
     })),
   };
   return (
-    <nav className="crumbs wrap" aria-label="breadcrumb">
-      {items.map((c, i) => (
-        <span key={c.href}>
-          {i > 0 && <span className="crumbs__sep">/</span>}
-          <Link href={c.href}>{c.name}</Link>
-        </span>
-      ))}
+    <div className="crumbs-bar">
+      <nav className="crumbs wrap" aria-label="breadcrumb">
+        {items.map((c, i) => (
+          <span key={c.href}>
+            {i > 0 && <span className="crumbs__sep">/</span>}
+            <Link href={c.href}>{c.name}</Link>
+          </span>
+        ))}
+      </nav>
       <JsonLd data={ld} />
-    </nav>
+    </div>
   );
 }

@@ -41,6 +41,7 @@ export default function ServicePage({ service }: { service: Service }) {
         kicker={service.hero.kicker}
         title={service.title}
         subtitle={service.hero.subtitle}
+        compactTop
         actions={<WhatsAppButton message={`Olá, tenho interesse em ${service.title}.`} />}
       />
 

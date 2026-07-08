@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import WhatsAppButton from "./WhatsAppButton";
+import Logo from "./Logo";
 
 const nav = [
   { href: "/servicos", label: "Serviços" },
@@ -14,7 +15,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 200);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -23,7 +24,7 @@ export default function Header() {
   return (
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <div className="wrap header__inner">
-        <Link href="/" className="header__logo" aria-label="Rucad Engenharia">RUCAD</Link>
+        <Link href="/" className="header__logo" aria-label="Rucad Engenharia"><Logo height={38} /></Link>
         <nav className={`header__nav ${open ? "is-open" : ""}`}>
           {nav.map((n) => (
             <Link key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</Link>

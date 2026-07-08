@@ -92,19 +92,24 @@ img, video { max-width: 100%; display: block; }
 
 /* ================================= Header ================================== */
 .header {
-  position: sticky; top: 0; z-index: 100;
-  transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease), padding var(--dur) var(--ease);
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  transition: background var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease), padding var(--dur) var(--ease);
   background: transparent; padding: 20px 0;
 }
-.header--scrolled { background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); padding: 12px 0; }
+.header--scrolled {
+  background: rgba(10, 23, 37, 0.72);
+  backdrop-filter: blur(24px);
+  padding: 12px 0;
+}
 .header__inner { display: flex; align-items: center; justify-content: space-between; }
-.header__logo { font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; font-size: 22px; color: var(--brand-primary); }
-.header__nav { display: flex; align-items: center; gap: 28px; font-family: var(--font-heading); font-weight: 500; }
+.header__logo { display: inline-flex; align-items: center; }
+/* Header sits over dark backgrounds, so nav is light in both states */
+.header__nav { display: flex; align-items: center; gap: 28px; font-family: var(--font-heading); font-weight: 500; color: #fff; }
 .header__burger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; }
-.header__burger span { width: 24px; height: 2px; background: var(--brand-primary); }
+.header__burger span { width: 24px; height: 2px; background: #fff; }
 @media (max-width: 860px) {
   .header__burger { display: flex; }
-  .header__nav { position: fixed; inset: 64px 0 auto 0; flex-direction: column; background: #fff; padding: 24px var(--gutter); gap: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-120%); transition: transform var(--dur) var(--ease); }
+  .header__nav { position: fixed; inset: 68px 0 auto 0; flex-direction: column; align-items: flex-start; background: rgba(10, 23, 37, 0.96); backdrop-filter: blur(24px); padding: 24px var(--gutter); gap: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); transform: translateY(-120%); transition: transform var(--dur) var(--ease); }
   .header__nav.is-open { transform: translateY(0); }
 }
 
@@ -123,6 +128,7 @@ img, video { max-width: 100%; display: block; }
 
 /* ================================== Hero =================================== */
 .hero { padding: 140px 0 96px; }
+.hero--compact { padding-top: 40px; }
 .hero--dark { background: var(--bg-dark); color: var(--text-on-dark); }
 .hero__kicker { font-family: var(--font-heading); font-weight: 600; letter-spacing: 4px; font-size: 14px; color: var(--brand-secondary); margin-bottom: 16px; }
 .hero__title { font-size: clamp(40px, 7vw, 84px); font-weight: 700; max-width: 14ch; }
@@ -180,8 +186,10 @@ img, video { max-width: 100%; display: block; }
 .cta__actions { display: flex; gap: 14px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
 
 /* ============================== Breadcrumbs =============================== */
-.crumbs { padding-top: 24px; font-size: 14px; color: var(--text-muted); }
-.crumbs__sep { margin: 0 8px; }
+.crumbs-bar { background: var(--bg-dark); padding-top: 96px; padding-bottom: 8px; }
+.crumbs { font-size: 14px; color: rgba(255,255,255,0.7); }
+.crumbs a:hover { color: #fff; }
+.crumbs__sep { margin: 0 8px; color: rgba(255,255,255,0.4); }
 
 /* ============================== Service page ============================== */
 .service__cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 40px; }
