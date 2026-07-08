@@ -11,7 +11,6 @@ export const site = {
   addressLocality: "Campo Grande",
   addressRegion: "MS",
   postalCode: "79085-108",
-  creaMs: "[CREA-MS A CONFIRMAR]",
   social: {
     instagram: "https://www.instagram.com/rucadengenharia/",
     linkedin: "https://www.linkedin.com/company/rucad-engenharia/",

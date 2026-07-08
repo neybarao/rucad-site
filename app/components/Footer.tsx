@@ -29,7 +29,6 @@ export default function Footer() {
           <a href={`mailto:${site.email}`}>{site.email}</a>
           <p>{site.address}</p>
           <p>CNPJ: {site.cnpj}</p>
-          <p>CREA-MS: {site.creaMs}</p>
         </div>
       </div>
       <div className="wrap footer__bottom">© 2026 {site.name}</div>
