@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnimationProvider from "./components/AnimationProvider";
+import LoadingScreen from "./components/LoadingScreen";
 import JsonLd from "./components/JsonLd";
 import { site } from "@/content/site-data";
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           },
           sameAs: [site.social.instagram, site.social.linkedin],
         }} />
+        <LoadingScreen />
         <AnimationProvider />
         <Header />
         {children}

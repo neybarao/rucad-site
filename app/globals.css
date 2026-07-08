@@ -66,6 +66,25 @@ img, video { max-width: 100%; display: block; }
   .js-anim .reveal { opacity: 1 !important; transform: none !important; }
 }
 
+/* ============================== Loading screen ============================== */
+html.no-scroll, html.no-scroll body { overflow: hidden; }
+.loading {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: #0B386F;
+  opacity: 1;
+  transition: opacity 0.7s var(--ease);
+}
+.loading--fade { opacity: 0; pointer-events: none; }
+.loading__mark { animation: loading-pulse 1.8s ease-in-out infinite; will-change: transform, opacity; }
+@keyframes loading-pulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading__mark { animation: none; }
+}
+
 /* ============================= Layout primitives ============================ */
 .section { padding: 96px 0; }
 .section--dark { background: var(--bg-dark); color: var(--text-on-dark); }
