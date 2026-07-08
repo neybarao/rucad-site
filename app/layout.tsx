@@ -49,6 +49,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           email: site.email,
           areaServed: "BR",
           slogan: site.slogan,
+          taxID: site.cnpj,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: site.addressStreet,
+            addressLocality: site.addressLocality,
+            addressRegion: site.addressRegion,
+            postalCode: site.postalCode,
+            addressCountry: "BR",
+          },
           sameAs: [site.social.instagram, site.social.linkedin],
         }} />
         <AnimationProvider />
