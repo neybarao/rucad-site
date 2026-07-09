@@ -33,7 +33,6 @@ export default function Marquee() {
               src={`${base}/clientes/${name}.svg`}
               alt={name.replace("logo-", "")}
               aria-hidden={i >= logos.length}
-              loading="lazy"
             />
           ))}
         </div>
