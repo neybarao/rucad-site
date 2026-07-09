@@ -20,9 +20,6 @@ export default function Marquee() {
   const items = [...logos, ...logos];
   return (
     <section className="marquee-sec">
-      <div className="wrap">
-        <p className="marquee__eyebrow">Empresas que contam com a Rucad</p>
-      </div>
       <div className="marquee" aria-label="Clientes da Rucad">
         <div className="marquee__track">
           {items.map((name, i) => (

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { site } from "@/content/site-data";
 import { services } from "@/content/services";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="wrap footer__grid">
         <div>
-          <div className="footer__logo">RUCAD</div>
+          <Link href="/" className="header__logo" aria-label="Rucad Engenharia"><Logo height={38} /></Link>
           <p className="footer__slogan">{site.slogan}</p>
         </div>
         <nav>

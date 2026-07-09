@@ -34,11 +34,12 @@ export default function Home() {
 
       <Section>
         <Reveal as="div" stagger>
-          <p className="section__eyebrow reveal">O que resolvemos</p>
           <h2 className="section__title reveal">Um parceiro para toda a demanda elétrica.</h2>
           <p className="section__lead reveal">Da rede da fazenda à subestação da indústria, do loteamento ao laudo que libera a fiscalização. Você resolve tudo com uma empresa só, sem gerenciar vários fornecedores e sem correr atrás da concessionária. A gente cuida do projeto, da execução e da documentação.</p>
         </Reveal>
       </Section>
+
+      <Marquee />
 
       <Section>
         <Reveal as="div" stagger><h2 className="section__title reveal">Serviços</h2></Reveal>
@@ -60,8 +61,6 @@ export default function Home() {
         <div style={{ height: 32 }} />
         <ProcessSteps steps={homeSteps} />
       </Section>
-
-      <Marquee />
 
       <CtaSection
         title="Tem uma demanda elétrica? A gente resolve."
