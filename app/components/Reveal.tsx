@@ -21,7 +21,11 @@ export default function Reveal({ children, className, as = "div", stagger = fals
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const targets = stagger ? Array.from(el.children) : [el];
+    // Non-stagger: animate the wrapper AND any .reveal children together, so
+    // children that carry .reveal (and would otherwise stay hidden) also reveal.
+    const targets = stagger
+      ? Array.from(el.children)
+      : [el, ...Array.from(el.querySelectorAll<HTMLElement>(":scope .reveal"))];
     const ctx = gsap.context(() => {
       gsap.to(targets, {
         opacity: 1,
