@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Hero from "@/app/components/Hero";
 import Section from "@/app/components/Section";
 import ServicesGrid from "@/app/components/ServicesGrid";
 import CtaSection from "@/app/components/CtaSection";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
-import Reveal from "@/app/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Serviços de engenharia elétrica",
@@ -14,13 +14,14 @@ export const metadata: Metadata = {
 export default function ServicosIndex() {
   return (
     <main>
+      <Hero
+        kicker="SERVIÇOS"
+        title="Serviços de engenharia elétrica"
+        subtitle="Um portfólio completo para quem precisa de energia funcionando com segurança e dentro das normas. Projetamos, executamos e documentamos. Escolha a frente que resolve a sua demanda."
+        compactTop
+      />
       <Breadcrumbs items={[{ name: "Início", href: "/" }, { name: "Serviços", href: "/servicos" }]} />
       <Section>
-        <Reveal as="div">
-          <h1 className="section__title reveal">Serviços de engenharia elétrica</h1>
-          <p className="section__lead reveal">Um portfólio completo para quem precisa de energia funcionando com segurança e dentro das normas. Projetamos, executamos e documentamos. Escolha a frente que resolve a sua demanda.</p>
-        </Reveal>
-        <div style={{ height: 40 }} />
         <ServicesGrid />
       </Section>
       <CtaSection

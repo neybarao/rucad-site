@@ -3,8 +3,6 @@ import { Anek_Latin, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import AnimationProvider from "./components/AnimationProvider";
-import LoadingScreen from "./components/LoadingScreen";
 import JsonLd from "./components/JsonLd";
 import { site } from "@/content/site-data";
 
@@ -12,13 +10,13 @@ const anek = Anek_Latin({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-anek",
-  display: "swap",
+  display: "optional",
 });
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-dm-sans",
-  display: "swap",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
@@ -33,6 +31,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Rucad Engenharia",
+  },
+  icons: {
+    icon: "/favicon.svg",
   },
   twitter: { card: "summary_large_image" },
 };
@@ -61,8 +62,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           },
           sameAs: [site.social.instagram, site.social.linkedin],
         }} />
-        <LoadingScreen />
-        <AnimationProvider />
         <Header />
         {children}
         <Footer />

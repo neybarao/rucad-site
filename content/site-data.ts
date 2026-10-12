@@ -16,10 +16,9 @@ export const site = {
     linkedin: "https://www.linkedin.com/company/rucad-engenharia/",
   },
   stats: [
-    { value: "+500", label: "projetos realizados" },
-    { value: "+200km", label: "rede de média tensão executada", confirm: true },
-    { value: "100%", label: "de entregas no prazo contratual", confirm: true },
-    { value: "100%", label: "da equipe certificada", confirm: true },
+    { value: "1.405", label: "postes implantados em campo", countTo: 1405 },
+    { value: "93,37 km", label: "de rede elétrica executada", countTo: 93.37, decimals: 2, suffix: " km" },
+    { value: "4.695 kVA", label: "de potência instalada para operação", countTo: 4695, suffix: " kVA" },
   ],
 } as const;
 

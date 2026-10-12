@@ -24,7 +24,8 @@ export default function Home() {
       <Hero
         title={"Sua demanda,\nnossa solução."}
         subtitle={"Projeto, execução e laudo com responsável técnico\ndefinido desde o primeiro dia."}
-        bgImage={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg.png`}
+        bgImage={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg.jpg`}
+        bgImageMobile={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg-mobile.jpg`}
         actions={<>
           <WhatsAppButton />
           <Link className="btn btn--ghost" href="/servicos">Ver serviços</Link>

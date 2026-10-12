@@ -22,7 +22,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
+    <header className={`header ${scrolled ? "header--scrolled" : ""} ${open ? "header--open" : ""}`}>
       <div className="wrap header__inner">
         <Link href="/" className="header__logo" aria-label="Rucad Engenharia"><Logo height={38} /></Link>
         <nav className={`header__nav ${open ? "is-open" : ""}`}>
