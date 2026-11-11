@@ -32,7 +32,6 @@ export default function Home() {
   return (
     <main>
       <Hero
-        kicker="ENGENHARIA ELÉTRICA · CAMPO GRANDE, MS"
         title={"Sua demanda,\nnossa solução."}
         subtitle={"Projeto, execução e laudo com responsável técnico\ndefinido desde o primeiro dia."}
         bgImage={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg.jpg`}
