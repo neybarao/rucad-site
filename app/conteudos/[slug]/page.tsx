@@ -10,6 +10,11 @@ import JsonLd from "@/app/components/JsonLd";
 import Reveal from "@/app/components/Reveal";
 import { articles, getArticle } from "@/content/articles";
 import { site } from "@/content/site-data";
+import { pageMetadata, ORG_ID, WEBSITE_ID, DEFAULT_OG_IMAGE, absoluteUrl } from "@/lib/seo";
+
+function formatDate(iso: string): string {
+  return new Date(`${iso}T12:00:00`).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+}
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -21,15 +26,12 @@ export async function generateMetadata(
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
-  return {
+  return pageMetadata({
     title: article.seoTitle,
     description: article.metaDescription,
-    openGraph: {
-      title: `${article.seoTitle} · Rucad Engenharia`,
-      description: article.metaDescription,
-      type: "article",
-    },
-  };
+    path: `/conteudos/${article.slug}/`,
+    type: "article",
+  });
 }
 
 export default async function ConteudoPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -38,16 +40,23 @@ export default async function ConteudoPage({ params }: { params: Promise<{ slug:
   if (!article) notFound();
 
   const url = `${site.domain}/conteudos/${article.slug}/`;
+  const updated = article.dateModified ?? article.datePublished;
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.metaDescription,
     url,
-    author: { "@type": "Organization", name: site.name, url: site.domain },
-    publisher: { "@type": "Organization", name: site.name, url: site.domain },
+    image: absoluteUrl(DEFAULT_OG_IMAGE.url),
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    isPartOf: { "@id": WEBSITE_ID },
     inLanguage: "pt-BR",
     mainEntityOfPage: url,
+    about: article.primaryKeyword,
+    keywords: [article.primaryKeyword, ...article.secondaryKeywords].join(", "),
+    ...(article.datePublished ? { datePublished: article.datePublished } : {}),
+    ...(article.dateModified || article.datePublished ? { dateModified: article.dateModified ?? article.datePublished } : {}),
   };
   const faqLd = {
     "@context": "https://schema.org",
@@ -80,10 +89,17 @@ export default async function ConteudoPage({ params }: { params: Promise<{ slug:
           </Reveal>
 
           <Reveal as="div" className="article__meta">
-            <div>
-              <span>Palavra-chave</span>
-              <strong>{article.primaryKeyword}</strong>
-            </div>
+            {updated ? (
+              <div>
+                <span>Atualizado em</span>
+                <strong><time dateTime={updated}>{formatDate(updated)}</time></strong>
+              </div>
+            ) : (
+              <div>
+                <span>Tema</span>
+                <strong>{article.primaryKeyword.charAt(0).toUpperCase() + article.primaryKeyword.slice(1)}</strong>
+              </div>
+            )}
             <div>
               <span>Serviços relacionados</span>
               {article.relatedServices.map((service) => (

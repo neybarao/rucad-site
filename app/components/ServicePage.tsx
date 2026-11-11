@@ -11,19 +11,35 @@ import { site } from "@/content/site-data";
 import { articles } from "@/content/articles";
 import type { Service } from "@/content/services";
 import Link from "next/link";
+import { ORG_ID, absoluteUrl } from "@/lib/seo";
+import { getServiceImagePath, getServiceImageSrc } from "@/lib/service-media";
 
 export default function ServicePage({ service }: { service: Service }) {
   const relatedArticles = articles.filter((article) =>
     article.relatedServices.some((related) => related.href === `/servicos/${service.slug}`)
   );
+  const url = `${site.domain}/servicos/${service.slug}/`;
+  const imagePath = getServiceImagePath(service.slug);
+  const heroImage = getServiceImageSrc(service.slug);
   const serviceLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${url}#service`,
     name: service.title,
-    provider: { "@type": "Organization", name: site.name, url: site.domain },
-    areaServed: "BR",
-    description: service.metaDescription,
-    url: `${site.domain}/servicos/${service.slug}/`,
+    serviceType: service.seoTitle,
+    provider: { "@id": ORG_ID },
+    areaServed: { "@type": "Country", name: "Brasil" },
+    description: service.intro,
+    url,
+    ...(imagePath ? { image: absoluteUrl(imagePath) } : {}),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `O que inclui: ${service.title}`,
+      itemListElement: service.includes.map((item) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: item },
+      })),
+    },
   };
   const faqLd = {
     "@context": "https://schema.org",
@@ -42,6 +58,7 @@ export default function ServicePage({ service }: { service: Service }) {
         title={service.title}
         subtitle={service.hero.subtitle}
         compactTop
+        bgImage={heroImage}
         actions={<WhatsAppButton message={`Olá, tenho interesse em ${service.title}.`} />}
       />
       <Breadcrumbs items={[

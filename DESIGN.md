@@ -89,14 +89,13 @@ Paginas internas:
 
 ### Servicos
 
-O grid de servicos deve parecer mais visual e menos formulario.
+Bento grid minimalista e uniforme (`ServicesGrid` + `ServiceCard`).
 
-Direcao atual:
-
-- Bento grid sem strokes.
-- Blocos escuros, um destaque amarelo, areas internas reservadas para imagens ou composicoes.
-- Cada card continua sendo link para pagina de servico.
-- Futuramente substituir os placeholders por imagens reais ou renders tecnicos.
+- Hierarquia so pela area: primeira linha 7/5 colunas, segunda linha 4/4/4. Tablet 2 colunas com o primeiro card em largura total; mobile 1 coluna.
+- Todos os cards com o mesmo tratamento: imagem full-bleed, degrade escuro no terco inferior, numero em amarelo, titulo, resumo e seta circular no canto superior direito.
+- Amarelo so como sinal: numero e seta no hover. Nenhum card inteiro amarelo.
+- Imagem por servico em `public/servicos/<slug>.webp`, detectada no build. Sem imagem, entra um placeholder azul com grid sutil. A mesma imagem vira fundo do hero da pagina do servico e imagem OG.
+- Prompts de geracao em `content/11-prompts-imagens-servicos.md`.
 
 ### Conteudos Relacionados
 

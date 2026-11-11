@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/app/components/Hero";
 import Section from "@/app/components/Section";
 import WhatsAppButton from "@/app/components/WhatsAppButton";
 import Reveal from "@/app/components/Reveal";
 import { site } from "@/content/site-data";
 
-export const metadata: Metadata = {
-  title: "Contato",
+export const metadata: Metadata = pageMetadata({
+  title: "Contato e orçamento",
   description:
     "Fale com a Rucad Engenharia. Levantamento no local e proposta com prazo e responsável técnico definidos. WhatsApp (67) 99650-6767.",
-};
+  path: "/contato/",
+});
 
 export default function Contato() {
   return (

@@ -16,6 +16,9 @@ export type Article = {
   };
   summary: string;
   primaryKeyword: string;
+  /** ISO 8601 (AAAA-MM-DD). Preencher no dia da publicação: entra no JSON-LD e no "Atualizado em". */
+  datePublished?: string;
+  dateModified?: string;
   secondaryKeywords: string[];
   relatedServices: { label: string; href: string }[];
   sections: ArticleSection[];

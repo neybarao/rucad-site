@@ -12,7 +12,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
-      item: `${site.domain}${c.href}`,
+      item: `${site.domain}${c.href.endsWith("/") ? c.href : `${c.href}/`}`,
     })),
   };
   return (

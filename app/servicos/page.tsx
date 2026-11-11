@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/app/components/Hero";
 import Section from "@/app/components/Section";
 import ServicesGrid from "@/app/components/ServicesGrid";
 import CtaSection from "@/app/components/CtaSection";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Serviços de engenharia elétrica",
   description:
     "Projetos e SPDA, laudos e ensaios, construção de redes e subestações, eficiência energética e usinas solares. Conheça as soluções da Rucad Engenharia.",
-};
+  path: "/servicos/",
+});
 
 export default function ServicosIndex() {
   return (

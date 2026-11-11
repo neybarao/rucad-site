@@ -4,6 +4,7 @@ export type Service = {
   slug: string;
   title: string; // H1
   cardSummary: string; // one-line for home/index cards
+  imageAlt: string; // alt da imagem do serviço (public/servicos/<slug>.webp)
   seoTitle: string; // <= 60 chars, template appends " · Rucad Engenharia"
   metaDescription: string;
   hero: { kicker: string; subtitle: string };
@@ -22,6 +23,7 @@ export const services: Service[] = [
     title: "Projeto Elétrico e SPDA",
     cardSummary:
       "Projeto elétrico e de proteção contra descargas atmosféricas, com ART emitida no prazo.",
+    imageAlt: "Engenheiro revisando projeto elétrico em frente a galpão industrial com sistema de proteção contra descargas atmosféricas",
     seoTitle: "Projeto Elétrico e SPDA",
     metaDescription:
       "Projeto elétrico e de SPDA dimensionado por engenheiro, com ART emitida no prazo. Para indústrias, galpões, loteamentos, obras e propriedades rurais.",
@@ -73,6 +75,7 @@ export const services: Service[] = [
     title: "Ensaios, Comissionamento e Laudos Técnicos",
     cardSummary:
       "Laudos e ensaios de SEP, UFV e SPDA para operar em conformidade e liberar a fiscalização.",
+    imageAlt: "Técnico com EPI realizando ensaio elétrico em painel de média tensão",
     seoTitle: "Laudo Elétrico, Ensaios e Comissionamento",
     metaDescription:
       "Laudos e ensaios de SEP, UFV e SPDA, comissionamento e apoio à conformidade NR-10. A documentação que libera a operação e a fiscalização.",
@@ -124,6 +127,7 @@ export const services: Service[] = [
     title: "Construção e Manutenção de Redes Elétricas",
     cardSummary:
       "Redes de distribuição de baixa e média tensão, subestações e loteamentos, do rural ao urbano.",
+    imageAlt: "Equipe com caminhão cesto construindo rede de distribuição de energia em estrada rural",
     seoTitle: "Construção de Redes e Subestações",
     metaDescription:
       "Construção, expansão e manutenção de redes de baixa e média tensão, subestações e loteamentos. Equipe e equipamentos próprios, do rural ao urbano.",
@@ -174,6 +178,7 @@ export const services: Service[] = [
     title: "Eficiência Energética",
     cardSummary:
       "Diagnóstico e gestão de custos para consumir melhor e pagar menos pela energia.",
+    imageAlt: "Engenheiro analisando dados de consumo de energia em painel elétrico industrial",
     seoTitle: "Eficiência Energética",
     metaDescription:
       "Diagnóstico de consumo e gestão estratégica de custos de energia. Reduza a conta e planeje investimentos com dado técnico, não com achismo.",
@@ -223,6 +228,7 @@ export const services: Service[] = [
     title: "Usinas e Sistemas Fotovoltaicos (UFV)",
     cardSummary:
       "Projeto e implantação de usinas e sistemas fotovoltaicos, do dimensionamento à conexão.",
+    imageAlt: "Usina fotovoltaica de solo em área rural com técnicos fazendo inspeção",
     seoTitle: "Usina Fotovoltaica e Energia Solar",
     metaDescription:
       "Projeto e implantação de usinas e sistemas fotovoltaicos, do dimensionamento à conexão com a rede. Energia própria com retorno calculado e laudo de UFV.",

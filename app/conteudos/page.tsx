@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Hero from "@/app/components/Hero";
 import Section from "@/app/components/Section";
@@ -7,11 +8,12 @@ import CtaSection from "@/app/components/CtaSection";
 import Reveal from "@/app/components/Reveal";
 import { articles } from "@/content/articles";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Conteúdos de engenharia elétrica",
   description:
     "Guias técnicos da Rucad sobre subestações, laudos, SPDA, redes elétricas, energia rural e conformidade para empresas e propriedades.",
-};
+  path: "/conteudos/",
+});
 
 export default function ConteudosIndex() {
   return (

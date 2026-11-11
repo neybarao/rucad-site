@@ -595,6 +595,10 @@ html.no-scroll body {
     padding-bottom: 4rem;
   }
 
+  .hero--compact.hero--image {
+    min-height: 0;
+  }
+
   .hero--compact .hero__title {
     font-size: clamp(3.25rem, 14vw, 4.5rem);
     max-width: 10ch;
@@ -787,267 +791,162 @@ html.no-scroll body {
 }
 
 /* ============================== Service cards ============================== */
+/* Bento uniforme: mesma moldura, mesma tipografia e mesmo tratamento em todos os
+   cards. A hierarquia vem só da área (7/5 na primeira linha, 4/4/4 na segunda).
+   A imagem ocupa o card inteiro; sem imagem, entra um placeholder neutro. */
 .sgrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: clamp(0.875rem, 1.6vw, 1.25rem);
+  grid-auto-rows: minmax(22rem, auto);
+  gap: 16px;
 }
 
 .scard {
   position: relative;
-  min-height: 16.5rem;
-  border-radius: clamp(1.5rem, 2.4vw, 2rem);
-  padding: clamp(1.5rem, 2.4vw, 2rem);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
+  justify-content: flex-end;
+  grid-column: span 4;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   isolation: isolate;
-  color: #F4FAFC;
-  background:
-    radial-gradient(circle at 75% 5%, rgba(253, 242, 78, 0.18), transparent 26rem),
-    linear-gradient(145deg, #102941 0%, #071521 100%);
-  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+  color: var(--text-on-dark);
+  background: var(--blue-800);
 }
 
-.scard:hover {
-  transform: translateY(-6px);
-}
-
-.scard--1 {
-  grid-column: span 6;
-  min-height: 31rem;
-}
-
-.scard--2 {
-  grid-column: span 6;
-  min-height: 31rem;
-}
-
-.scard--3 {
-  grid-column: span 4;
-  min-height: 25rem;
-}
-
-.scard--4 {
-  grid-column: span 4;
-  min-height: 25rem;
-  background:
-    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.28), transparent 13rem),
-    linear-gradient(145deg, #FDF24E 0%, #DDEB2E 100%);
-  color: #06101B;
-}
-
-.scard--5 {
-  grid-column: span 4;
-  min-height: 25rem;
-}
+.scard--1 { grid-column: span 7; }
+.scard--2 { grid-column: span 5; }
+.scard--1,
+.scard--2 { min-height: 26rem; }
 
 .scard__media {
-  position: relative;
-  min-height: 7.25rem;
-  border-radius: 1.25rem;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)),
-    radial-gradient(circle at 34% 28%, rgba(136, 219, 238, 0.32), transparent 8rem),
-    rgba(255, 255, 255, 0.04);
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 }
 
-.scard--1 .scard__media,
-.scard--2 .scard__media {
-  min-height: 15.5rem;
+.scard__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
 }
 
-.scard--3 .scard__media,
-.scard--4 .scard__media,
-.scard--5 .scard__media {
-  min-height: 9.5rem;
-}
-
-.scard--4 .scard__media {
-  background:
-    radial-gradient(circle at 50% 48%, rgba(6, 16, 27, 0.14), transparent 6rem),
-    rgba(6, 16, 27, 0.08);
-}
-
-.scard__media::before,
 .scard__media::after {
   content: "";
   position: absolute;
-  inset: auto;
-  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 9, 19, 0.15) 0%, rgba(2, 9, 19, 0) 22%, rgba(2, 9, 19, 0.62) 56%, rgba(2, 9, 19, 0.94) 100%);
 }
 
-.scard__media::before {
-  width: 72%;
-  height: 42%;
-  left: -8%;
-  bottom: 18%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(136, 219, 238, 0.48), rgba(253, 242, 78, 0.72));
-  transform: rotate(-12deg);
-}
-
-.scard__media::after {
-  width: 0.875rem;
-  height: 0.875rem;
-  right: 21%;
-  bottom: 36%;
-  border-radius: 50%;
-  background: var(--brand-secondary);
-  box-shadow: 0 0 0 1.35rem rgba(253, 242, 78, 0.08), 0 0 2.5rem rgba(253, 242, 78, 0.44);
-}
-
-.scard--2 .scard__media::before {
-  width: 58%;
-  height: 58%;
-  left: 20%;
-  bottom: 19%;
-  border-radius: 42% 58% 40% 60%;
-  background: rgba(136, 219, 238, 0.34);
-  transform: rotate(18deg);
-}
-
-.scard--2 .scard__media::after {
-  right: 36%;
-  bottom: 42%;
-}
-
-.scard--3 .scard__media::before {
-  width: 86%;
-  height: 0.4rem;
-  left: 7%;
-  bottom: 54%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #88DBEE, #FDF24E 58%, #88DBEE);
-  transform: rotate(0);
-}
-
-.scard--3 .scard__media::after {
-  right: 12%;
-  bottom: 50%;
-}
-
-.scard--4 .scard__media::before {
-  width: 70%;
-  height: 0.45rem;
-  left: 14%;
-  bottom: 42%;
-  background: linear-gradient(90deg, #06101B, rgba(6, 16, 27, 0.28));
-  transform: rotate(-7deg);
-}
-
-.scard--4 .scard__media::after {
-  background: #06101B;
-  box-shadow: 0 0 0 1.2rem rgba(6, 16, 27, 0.08);
-}
-
-.scard--5 .scard__media::before {
-  width: 44%;
-  height: 64%;
-  left: 30%;
-  bottom: 12%;
-  border-radius: 50%;
-  background: rgba(253, 242, 78, 0.24);
-  transform: rotate(0);
-}
-
-.scard__mediaGlow {
+.scard__placeholder {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 3.5rem 3.5rem;
-  opacity: 0.26;
-  mask-image: linear-gradient(180deg, #000, transparent);
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(160deg, var(--blue-700) 0%, var(--blue-800) 55%, var(--blue-900) 100%);
+}
+
+.scard__arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-on-dark);
+  background: rgba(2, 9, 19, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 
 .scard__copy {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  min-height: 11rem;
+  gap: 10px;
+  padding: 28px;
 }
 
-.scard__eyebrow {
+.scard__index {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
   color: var(--brand-secondary);
-  margin-bottom: 0.75rem;
-}
-
-.scard--4 .scard__eyebrow {
-  color: rgba(6, 16, 27, 0.68);
 }
 
 .scard__title {
-  font-size: clamp(1.35rem, 2vw, 1.8rem);
-  line-height: 1.04;
-  max-width: 14ch;
+  font-size: clamp(1.35rem, 1.9vw, 1.65rem);
+  line-height: 1.1;
+  font-weight: 700;
   color: inherit;
+  max-width: 22ch;
 }
 
 .scard__summary {
-  color: rgba(244, 250, 252, 0.7);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  line-height: 1.45;
-  max-width: 30ch;
-  margin-top: 1rem;
-  flex: 1;
+  margin: 0;
+  max-width: 44ch;
+  font-size: 0.975rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.74);
 }
 
-.scard--4 .scard__summary {
-  color: rgba(6, 16, 27, 0.68);
+.scard:hover .scard__media img,
+.scard:focus-visible .scard__media img {
+  transform: scale(1.04);
 }
 
-.scard__cta {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: inherit;
-  margin-top: 1.5rem;
+.scard:hover .scard__arrow,
+.scard:focus-visible .scard__arrow {
+  background: var(--brand-secondary);
+  border-color: var(--brand-secondary);
+  color: var(--blue-900);
+  transform: rotate(45deg);
 }
 
-.scard__cta::after {
-  content: " ->";
-  color: var(--brand-secondary);
+.scard:focus-visible {
+  outline: 3px solid var(--brand-secondary);
+  outline-offset: 3px;
 }
 
-.scard--4 .scard__cta::after {
-  color: rgba(6, 16, 27, 0.7);
+@media (prefers-reduced-motion: reduce) {
+  .scard__media img,
+  .scard__arrow {
+    transition: none;
+  }
+  .scard:hover .scard__media img {
+    transform: none;
+  }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
+  .sgrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(20rem, auto);
+  }
+  .scard,
+  .scard--2 { grid-column: span 1; }
+  .scard--1 { grid-column: span 2; }
+  .scard--1,
+  .scard--2 { min-height: 0; }
+}
+
+@media (max-width: 640px) {
   .sgrid {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
+    gap: 12px;
   }
-
   .scard,
   .scard--1,
-  .scard--2,
-  .scard--3,
-  .scard--4,
-  .scard--5 {
+  .scard--2 {
     grid-column: auto;
-    grid-row: auto;
-    min-height: 0;
+    min-height: 20rem;
   }
-
-  .scard__media,
-  .scard--1 .scard__media,
-  .scard--3 .scard__media {
-    min-height: 10rem;
-  }
-
-  .scard__copy {
-    min-height: 0;
-  }
+  .scard__copy { padding: 22px; }
 }
 
 /* ============================== Article cards ============================== */

@@ -10,6 +10,16 @@ import Reveal from "./components/Reveal";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Link from "next/link";
 import { site } from "@/content/site-data";
+import { pageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Rucad Engenharia · Engenharia elétrica em Campo Grande, MS",
+  description:
+    "Projeto elétrico e SPDA, laudos, redes de distribuição, subestações, eficiência energética e usinas solares. Engenharia elétrica com responsável técnico do começo ao fim.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 const homeSteps = [
   { title: "Contato e levantamento", body: "A gente vai até o local, entende a demanda e avalia as condições." },
@@ -22,6 +32,7 @@ export default function Home() {
   return (
     <main>
       <Hero
+        kicker="ENGENHARIA ELÉTRICA · CAMPO GRANDE, MS"
         title={"Sua demanda,\nnossa solução."}
         subtitle={"Projeto, execução e laudo com responsável técnico\ndefinido desde o primeiro dia."}
         bgImage={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero-bg.jpg`}

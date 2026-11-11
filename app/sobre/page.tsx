@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Hero from "@/app/components/Hero";
 import Section from "@/app/components/Section";
 import Pillars from "@/app/components/Pillars";
@@ -7,11 +8,12 @@ import CtaSection from "@/app/components/CtaSection";
 import Reveal from "@/app/components/Reveal";
 import { site } from "@/content/site-data";
 
-export const metadata: Metadata = {
-  title: "Sobre a Rucad · Empresa de engenharia elétrica",
+export const metadata: Metadata = pageMetadata({
+  title: "Sobre a Rucad, engenharia elétrica em MS",
   description:
     "A Rucad é uma empresa de engenharia elétrica com corpo técnico qualificado, equipamentos próprios e cultura de entrega no prazo. Conheça a Rucad.",
-};
+  path: "/sobre/",
+});
 
 export default function Sobre() {
   return (

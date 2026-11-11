@@ -16,6 +16,8 @@ Pasta de trabalho com o conteúdo do novo site, um arquivo por página, para rev
 | `07-servico-ufv-fotovoltaica.md` | UFV / Fotovoltaica | `/servicos/ufv-fotovoltaica` |
 | `08-sobre.md` | Sobre | `/sobre` |
 | `09-contato.md` | Contato | `/contato` |
+| `11-prompts-imagens-servicos.md` | Prompts de imagem dos serviços (ChatGPT) | `public/servicos/` |
+| `12-checklist-publicacao-indexacao.md` | Checklist de publicação e auditoria de indexação | (documento interno) |
 
 ## Como revisar
 
