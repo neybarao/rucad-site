@@ -270,7 +270,7 @@ function eficiencia(): THREE.Group {
 /** Mesas de módulos fotovoltaicos sobre estrutura. */
 function ufv(): THREE.Group {
   const g = new THREE.Group();
-  const tilt = -0.5;
+  const tilt = 0.5;
   const table = (z: number) => {
     const t = new THREE.Group();
     t.position.z = z;
@@ -284,10 +284,14 @@ function ufv(): THREE.Group {
     }
     part(panels, new THREE.BoxGeometry(2.0, 0.04, 0.05), T(14), { pos: [0, -0.04, -0.32] });
     part(panels, new THREE.BoxGeometry(2.0, 0.04, 0.05), T(14), { pos: [0, -0.04, 0.32] });
+    // hastes: do chão até a face de baixo de cada trilho, calculado a partir
+    // da transformação real da mesa (assim encostam certinho na estrutura)
+    panels.updateMatrix();
     for (const x of [-0.85, 0, 0.85]) {
-      const back = new THREE.Vector3(x, 0, -0.3), front = new THREE.Vector3(x, 0, 0.3);
-      rod(t, back, back.clone().setY(0.75 + Math.sin(-tilt) * 0.3 - 0.06), 0.02);
-      rod(t, front, front.clone().setY(0.75 - Math.sin(-tilt) * 0.3 - 0.06), 0.02);
+      for (const z of [-0.32, 0.32]) {
+        const top = new THREE.Vector3(x, -0.06, z).applyMatrix4(panels.matrix);
+        rod(t, new THREE.Vector3(top.x, 0, top.z), top, 0.02);
+      }
     }
   };
   table(-0.62);
