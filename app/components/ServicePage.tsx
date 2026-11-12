@@ -28,7 +28,7 @@ export default function ServicePage({ service }: { service: Service }) {
     name: service.title,
     serviceType: service.seoTitle,
     provider: { "@id": ORG_ID },
-    areaServed: { "@type": "Country", name: "Brasil" },
+    areaServed: site.serviceArea.states.map((name) => ({ "@type": "State", name })),
     description: service.intro,
     url,
     ...(imagePath ? { image: absoluteUrl(imagePath) } : {}),

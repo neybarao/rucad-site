@@ -13,7 +13,7 @@ export function GET() {
   const lines: string[] = [
     `# ${site.name}`,
     "",
-    `> Empresa de engenharia elétrica com sede em ${site.addressLocality} (${site.addressRegion}). Faz projeto elétrico e SPDA, ensaios, comissionamento e laudos técnicos, construção e manutenção de redes de baixa e média tensão e subestações, eficiência energética e usinas fotovoltaicas, com ART e responsável técnico definido.`,
+    `> Empresa de engenharia elétrica com sede em ${site.addressLocality} (${site.addressRegion}) e atendimento em Mato Grosso do Sul e estados vizinhos (MT, GO, MG, SP e PR). Faz projeto elétrico e SPDA, ensaios, comissionamento e laudos técnicos, construção e manutenção de redes de baixa e média tensão e subestações, eficiência energética e usinas fotovoltaicas, com ART e responsável técnico definido.`,
     "",
     "Atende indústrias, frigoríficos, construtoras e loteamentos, empreiteiras, propriedades rurais e empresas que querem reduzir custo de energia. O contato comercial é feito pelo WhatsApp, com levantamento técnico no local antes da proposta.",
     "",
@@ -38,6 +38,8 @@ export function GET() {
     `- [Sobre a Rucad](${url("/sobre/")}): história, estrutura e forma de trabalho.`,
     `- [Contato](${url("/contato/")}): WhatsApp ${site.phoneDisplay}, e-mail ${site.email}.`,
     `- Endereço: ${site.address}.`,
+    `- Área de atendimento: ${site.serviceArea.display}.`,
+    `- Horário: ${site.hours.display}.`,
     `- CNPJ: ${site.cnpj}.`,
     "",
   );

@@ -114,8 +114,8 @@ Nao ha formulario nesta fase. O site deve levar o usuario a uma conversa com con
 
 ## Pendencias De Produto
 
-- Confirmar numeros institucionais que podem ser publicados.
-- Confirmar lista de clientes/logos autorizados.
+- ~~Confirmar numeros institucionais que podem ser publicados.~~ Confirmado pela Rucad (11/11/2026).
+- ~~Confirmar lista de clientes/logos autorizados.~~ Confirmado pela Rucad (11/11/2026).
 - Confirmar imagens reais que a Rucad quer usar em hero, servicos e sobre.
 - Confirmar dados de CREA, responsavel tecnico e certificacoes que podem aparecer publicamente.
 - Evoluir artigos tecnicos a partir da pesquisa de publico-alvo e das paginas de servico.

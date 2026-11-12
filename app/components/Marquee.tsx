@@ -32,6 +32,8 @@ export default function Marquee() {
               aria-hidden={i >= logos.length}
               width={width}
               height={40}
+              loading="lazy"
+              decoding="async"
             />
           ))}
         </div>

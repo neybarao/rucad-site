@@ -59,12 +59,18 @@ const orgLd = {
       logo: { "@type": "ImageObject", url: LOGO_URL, width: 512, height: 512 },
       image: absoluteUrl(DEFAULT_OG_IMAGE.url),
       description:
-        "Empresa de engenharia elétrica de Campo Grande (MS): projeto elétrico e SPDA, laudos e ensaios, construção e manutenção de redes e subestações, eficiência energética e usinas fotovoltaicas.",
+        "Empresa de engenharia elétrica de Campo Grande (MS), com atendimento em Mato Grosso do Sul e estados vizinhos: projeto elétrico e SPDA, laudos e ensaios, construção e manutenção de redes e subestações, eficiência energética e usinas fotovoltaicas.",
       slogan: site.slogan,
       telephone: `+${site.phoneRaw}`,
       email: site.email,
       taxID: site.cnpj,
-      areaServed: { "@type": "Country", name: "Brasil" },
+      areaServed: site.serviceArea.states.map((name) => ({ "@type": "State", name, containedInPlace: { "@type": "Country", name: "Brasil" } })),
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: site.hours.days.map((d) => `https://schema.org/${d}`),
+        opens: site.hours.opens,
+        closes: site.hours.closes,
+      },
       address: {
         "@type": "PostalAddress",
         streetAddress: site.addressStreet,
@@ -79,6 +85,13 @@ const orgLd = {
         telephone: `+${site.phoneRaw}`,
         email: site.email,
         availableLanguage: "pt-BR",
+        areaServed: "BR",
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: site.hours.days.map((d) => `https://schema.org/${d}`),
+          opens: site.hours.opens,
+          closes: site.hours.closes,
+        },
       },
       knowsAbout: [
         "Projeto elétrico",

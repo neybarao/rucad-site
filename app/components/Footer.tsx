@@ -29,6 +29,7 @@ export default function Footer() {
           <a href={`tel:+${site.phoneRaw}`}>{site.phoneDisplay}</a>
           <a href={`mailto:${site.email}`}>{site.email}</a>
           <p>{site.address}</p>
+          <p>{site.hours.display}</p>
           <p>CNPJ: {site.cnpj}</p>
         </div>
       </div>

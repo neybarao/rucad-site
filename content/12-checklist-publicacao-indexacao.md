@@ -4,11 +4,11 @@ Documento de trabalho. A auditoria só faz sentido depois que o site estiver no 
 
 ## Antes de publicar
 
-- [ ] Imagens dos 5 serviços em `public/servicos/` (prompts em `11-prompts-imagens-servicos.md`).
+- [ ] (Opcional) Imagens de preview por serviço. Os cards e heros usam os modelos 3D.
 - [ ] Preencher `datePublished` nos artigos de `content/articles.ts` com a data real de publicação.
-- [ ] Confirmar com a Rucad a área de atendimento (só MS? MS e estados vizinhos?). Hoje o schema diz "Brasil". Se for regional, trocar `areaServed` em `app/layout.tsx` e `ServicePage.tsx`.
-- [ ] Confirmar horário de atendimento para incluir `openingHoursSpecification` no schema (não incluído para não inventar).
-- [ ] Confirmar se os números do StatsBar e os logos de clientes estão autorizados (pendência já listada no PRODUCT.md).
+- [x] Área de atendimento confirmada: MS e estados vizinhos (MT, GO, MG, SP, PR). Aplicada no schema, no contato e no llms.txt.
+- [x] Horário confirmado: segunda a sexta, 7h30 às 17h30. Aplicado no schema, no contato e no rodapé.
+- [x] Números do StatsBar e logos de clientes confirmados pela Rucad.
 - [ ] Build de produção sem `DEPLOY_TARGET=pages` (sem basePath) e deploy no host do domínio.
 - [ ] Configurar redirecionamentos 301 das URLs do site antigo para as novas, se o site antigo tiver páginas indexadas. Levantar as URLs antigas no Search Console ou com `site:rucadengenharia.com.br` antes de trocar.
 - [ ] Garantir que o GitHub Pages não fique público como cópia duplicada depois da migração (desativar ou apontar canonical, que já aponta para o domínio final).

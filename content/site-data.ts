@@ -11,6 +11,17 @@ export const site = {
   addressLocality: "Campo Grande",
   addressRegion: "MS",
   postalCode: "79085-108",
+  // Atendimento majoritário em MS e nos estados que fazem divisa com MS.
+  serviceArea: {
+    display: "Mato Grosso do Sul e estados vizinhos (MT, GO, MG, SP e PR)",
+    states: ["Mato Grosso do Sul", "Mato Grosso", "Goiás", "Minas Gerais", "São Paulo", "Paraná"],
+  },
+  hours: {
+    display: "Segunda a sexta, das 7h30 às 17h30",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "07:30",
+    closes: "17:30",
+  },
   social: {
     instagram: "https://www.instagram.com/rucadengenharia/",
     linkedin: "https://www.linkedin.com/company/rucad-engenharia/",

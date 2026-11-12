@@ -33,6 +33,12 @@ export default function Contato() {
           <div className="reveal contact__card">
             <h3>Endereço</h3><p>{site.address}</p>
           </div>
+          <div className="reveal contact__card">
+            <h3>Horário</h3><p>{site.hours.display}</p>
+          </div>
+          <div className="reveal contact__card">
+            <h3>Área de atendimento</h3><p>{site.serviceArea.display}</p>
+          </div>
           <a className="reveal contact__card" href={site.social.instagram} target="_blank" rel="noopener noreferrer">
             <h3>Instagram</h3><p>@rucadengenharia</p>
           </a>

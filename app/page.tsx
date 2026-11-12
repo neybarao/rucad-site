@@ -16,7 +16,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = pageMetadata({
   title: "Rucad Engenharia · Engenharia elétrica em Campo Grande, MS",
   description:
-    "Projeto elétrico e SPDA, laudos, redes de distribuição, subestações, eficiência energética e usinas solares. Engenharia elétrica com responsável técnico do começo ao fim.",
+    "Projeto elétrico e SPDA, laudos, redes, subestações e usinas solares em MS e estados vizinhos. Engenharia elétrica com responsável técnico do começo ao fim.",
   path: "/",
   absoluteTitle: true,
 });
