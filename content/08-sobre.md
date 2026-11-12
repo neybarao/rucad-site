@@ -3,6 +3,9 @@
 **Rota:** `/sobre`
 **Objetivo:** construir confiança. Quem é a Rucad, o que sustenta a competência técnica e por que confiar. Reforça a reputação, que é o principal fator de decisão do público.
 
+> Atualização (11/11/2026): página reescrita em tom institucional. Fonte da verdade agora é `app/sobre/page.tsx` (perfil, ficha da empresa, números, áreas de atuação, como trabalhamos, compromissos, clientes). O texto abaixo é a versão anterior.
+
+
 ---
 
 ## Bloco SEO

@@ -16,14 +16,21 @@ function formatStatValue(value: number, decimals = 0, suffix = "") {
   }).format(value)}${suffix}`;
 }
 
-function useCountUp(stat: Stat, active: boolean) {
+// O HTML sai do build com o valor real (é o que buscadores e robôs de IA leem,
+// muitos sem rodar JavaScript). No navegador, se a faixa ainda está fora da
+// tela, o número zera sem ninguém ver e conta até o valor quando aparece.
+function useCountUp(stat: Stat, active: boolean, offscreen: boolean) {
   const countTo = stat.countTo;
-  const [text, setText] = useState(
-    typeof countTo === "number" ? formatStatValue(0, stat.decimals, stat.suffix) : stat.value.replace(/[\d]/g, "0")
-  );
+  const [text, setText] = useState(stat.value);
 
   useEffect(() => {
-    if (!active) return;
+    if (!offscreen || active) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setText(typeof countTo === "number" ? formatStatValue(0, stat.decimals, stat.suffix) : stat.value.replace(/[\d]/g, "0"));
+  }, [offscreen, active, countTo, stat.decimals, stat.suffix, stat.value]);
+
+  useEffect(() => {
+    if (!active || !offscreen) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setText(stat.value); return; }
     if (typeof countTo !== "number") { setText(stat.value); return; }
 
@@ -36,12 +43,12 @@ function useCountUp(stat: Stat, active: boolean) {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [active, countTo, stat.decimals, stat.suffix, stat.value]);
+  }, [active, offscreen, countTo, stat.decimals, stat.suffix, stat.value]);
   return text;
 }
 
-function StatItem({ active, ...stat }: Stat & { active: boolean }) {
-  const shown = useCountUp(stat, active);
+function StatItem({ active, offscreen, ...stat }: Stat & { active: boolean; offscreen: boolean }) {
+  const shown = useCountUp(stat, active, offscreen);
   return (
     <div className="stat">
       <div className="stat__value">{shown}</div>
@@ -53,8 +60,11 @@ function StatItem({ active, ...stat }: Stat & { active: boolean }) {
 export default function StatsBar({ stats }: { stats: readonly Stat[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const [offscreen, setOffscreen] = useState(false);
   useEffect(() => {
     const el = ref.current; if (!el) return;
+    // só anima se a faixa começou fora da tela; se já está visível, fica o valor real
+    setOffscreen(el.getBoundingClientRect().top > window.innerHeight);
     let timer = 0;
     const startCount = () => {
       timer = window.setTimeout(() => setActive(true), 180);
@@ -72,7 +82,7 @@ export default function StatsBar({ stats }: { stats: readonly Stat[] }) {
   return (
     <div className="statsbar" ref={ref}>
       <div className="wrap statsbar__grid">
-        {stats.map((s, i) => <StatItem key={i} {...s} active={active} />)}
+        {stats.map((s, i) => <StatItem key={i} {...s} active={active} offscreen={offscreen} />)}
       </div>
     </div>
   );

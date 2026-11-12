@@ -3,6 +3,9 @@
 **Rota:** `/contato`
 **Objetivo:** converter. WhatsApp como caminho principal, com os demais dados de contato à disposição. Sem formulário.
 
+> Atualização (11/11/2026): página reestruturada. Fonte da verdade agora é `app/contato/page.tsx` (canais, sede com horário e área de atendimento, próximos passos e o que enviar para agilizar o orçamento). O texto abaixo é a versão anterior.
+
+
 ---
 
 ## Bloco SEO
