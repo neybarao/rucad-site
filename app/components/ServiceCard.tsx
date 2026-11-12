@@ -5,7 +5,7 @@ import ServiceModel from "./ServiceModel";
 export default function ServiceCard({ service, index }: { service: Service; index: number }) {
   const number = String(index + 1).padStart(2, "0");
   return (
-    <Link href={`/servicos/${service.slug}`} className={`scard scard--${index + 1} reveal`}>
+    <Link href={`/servicos/${service.slug}`} className={`scard scard--${index + 1} reveal`} data-model-hover>
       <span className="scard__stage" aria-hidden="true">
         <ServiceModel slug={service.slug} />
       </span>

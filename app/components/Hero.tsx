@@ -7,13 +7,16 @@ type Props = {
   compactTop?: boolean;
   bgImage?: string;
   bgImageMobile?: string;
+  /** ilustração no lado direito (ex.: modelo 3D do serviço) */
+  visual?: React.ReactNode;
 };
 
-export default function Hero({ kicker, title, subtitle, actions, dark = true, compactTop = false, bgImage, bgImageMobile }: Props) {
+export default function Hero({ kicker, title, subtitle, actions, dark = true, compactTop = false, bgImage, bgImageMobile, visual }: Props) {
   const classes = ["hero"];
   if (dark) classes.push("hero--dark");
   if (compactTop) classes.push("hero--compact");
   if (bgImage) classes.push("hero--image");
+  if (visual) classes.push("hero--visual");
   return (
     <section className={classes.join(" ")}>
       {bgImage && (
@@ -35,6 +38,11 @@ export default function Hero({ kicker, title, subtitle, actions, dark = true, co
         <p className="hero__subtitle">{subtitle}</p>
         {actions && <div className="hero__actions">{actions}</div>}
       </div>
+      {visual && (
+        <div className="hero__visual" data-model-hover aria-hidden="true">
+          {visual}
+        </div>
+      )}
     </section>
   );
 }

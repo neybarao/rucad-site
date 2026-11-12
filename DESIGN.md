@@ -96,7 +96,9 @@ Bento grid minimalista e uniforme (`ServicesGrid` + `ServiceCard`).
 - Modelos 3D procedurais em wireframe (`ServiceModel` + `lib/three/service-models.ts`): superficie clara, malha azul-escura (#0D1F38) desenhada no shader e contorno nas arestas. Um objeto por servico: galpao com SPDA, painel de media tensao com instrumento de ensaio, poste com cruzeta e transformador, medidor de energia inteligente, mesas fotovoltaicas.
 - Interacao: giro lento continuo + inclinacao seguindo o cursor dentro do card. Sem arrastar, para nao competir com o clique do link. Com reduced motion, o giro para.
 - Performance: three.js so e baixado quando a grid se aproxima da tela; o loop para fora da tela e com a aba oculta. Sem WebGL, o card fica so com o fundo liso.
-- Amarelo so como sinal: seta no hover.
+- Hover (no touch: card na faixa central da tela): para de girar, vai para vista isometrica quase ortografica, abre a vista explodida e pinta o elemento-chave de amarelo (para-raios, instrumento de ensaio, isoladores e condutores, visor do medidor, modulos).
+- Paginas de servico: o mesmo modelo no lado direito do hero, tema escuro (superficie azul, linha azul-clara #A9CCF7) sobre degrade radial do azul do hero para um azul mais claro.
+- Amarelo so como sinal: seta no hover e elemento-chave.
 
 ### Conteudos Relacionados
 

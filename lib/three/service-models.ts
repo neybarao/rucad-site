@@ -4,9 +4,13 @@ import * as THREE from "three";
 // superfície clara sombreada + malha de linhas azul-escuras desenhada no shader
 // (sem as diagonais dos triângulos) + contornos nas arestas vivas.
 
-export const MODEL_COLORS = {
-  surface: new THREE.Color("#f3f7fc"),
-  line: new THREE.Color("#0d1f38"),
+export type ModelTheme = "light" | "dark";
+
+// light: cards da home (fundo branco-azulado, linha azul-escura)
+// dark: hero das páginas de serviço (fundo azul, linha azul-clara)
+const THEMES: Record<ModelTheme, { surface: string; line: string; fade: string; edgeOpacity: number }> = {
+  light: { surface: "#f3f7fc", line: "#0d1f38", fade: "#e6edf7", edgeOpacity: 0.9 },
+  dark: { surface: "#0e2f59", line: "#a9ccf7", fade: "#0b2648", edgeOpacity: 0.85 },
 };
 
 type GridMode =
@@ -14,9 +18,13 @@ type GridMode =
   | { mode: "tri"; density: number }; // linhas em espaço do objeto (caixas, extrusões)
 
 export const KEY_COLOR = new THREE.Color("#FDF24E"); // amarelo da marca (--yellow-300)
+const KEY_EDGE = new THREE.Color("#0d1f38");
 
 // Contexto de um modelo: cada card tem o seu, para o hover de um não afetar os outros.
 type Ctx = {
+  surface: THREE.Color;
+  line: THREE.Color;
+  fade: THREE.Color;
   hi: { value: number }; // 0 = normal, 1 = hover (destaque + vista explodida)
   mats: Map<string, THREE.MeshStandardMaterial>;
   edge: THREE.LineBasicMaterial;
@@ -32,7 +40,7 @@ function gridMaterial(opts: GridMode, key: boolean, alpha = 0.42): THREE.MeshSta
   if (cached) return cached;
 
   const mat = new THREE.MeshStandardMaterial({
-    color: MODEL_COLORS.surface,
+    color: ctx.surface,
     roughness: 0.62,
     metalness: 0,
     polygonOffset: true,
@@ -41,9 +49,11 @@ function gridMaterial(opts: GridMode, key: boolean, alpha = 0.42): THREE.MeshSta
   });
   if (key) mat.defines = { KEY: 1 };
   const hi = ctx.hi;
+  const { line, fade } = ctx;
 
   mat.onBeforeCompile = (shader) => {
-    shader.uniforms.uLineColor = { value: MODEL_COLORS.line };
+    shader.uniforms.uLineColor = { value: line };
+    shader.uniforms.uFade = { value: fade };
     shader.uniforms.uLineAlpha = { value: alpha };
     shader.uniforms.uKeyColor = { value: KEY_COLOR };
     shader.uniforms.uHi = hi;
@@ -63,7 +73,7 @@ function gridMaterial(opts: GridMode, key: boolean, alpha = 0.42): THREE.MeshSta
     shader.fragmentShader = shader.fragmentShader
       .replace(
         "#include <common>",
-        "#include <common>\nuniform vec3 uLineColor;\nuniform float uLineAlpha;\nuniform vec3 uKeyColor;\nuniform float uHi;\nuniform vec2 uGrid;\nvarying vec3 vObjPos;\nvarying vec3 vObjNormal;\nvarying vec2 vGridUv;",
+        "#include <common>\nuniform vec3 uLineColor;\nuniform float uLineAlpha;\nuniform vec3 uKeyColor;\nuniform vec3 uFade;\nuniform float uHi;\nuniform vec2 uGrid;\nvarying vec3 vObjPos;\nvarying vec3 vObjNormal;\nvarying vec2 vGridUv;",
       )
       .replace(
         "#include <color_fragment>",
@@ -79,10 +89,12 @@ function gridMaterial(opts: GridMode, key: boolean, alpha = 0.42): THREE.MeshSta
          vec2 ga = abs(fract(g - 0.5) - 0.5) / max(gd, vec2(1e-4));
          float gl = 1.0 - min(min(ga.x, ga.y), 1.0);
          #ifdef KEY
-           outgoingLight = mix(outgoingLight, uLineColor, gl * uLineAlpha);
+           // sobre o amarelo, a malha da peça-chave fica azul-escura
+           vec3 keyLine = mix(uLineColor, vec3(0.0042, 0.0137, 0.0395), uHi);
+           outgoingLight = mix(outgoingLight, keyLine, gl * uLineAlpha);
          #else
            outgoingLight = mix(outgoingLight, uLineColor, gl * uLineAlpha * (1.0 - 0.55 * uHi));
-           outgoingLight = mix(outgoingLight, vec3(0.9, 0.93, 0.97), uHi * 0.45);
+           outgoingLight = mix(outgoingLight, uFade, uHi * 0.45);
          #endif
          #include <opaque_fragment>`,
       );
@@ -345,14 +357,19 @@ export type ServiceModelHandle = {
   dispose: () => void;
 };
 
-export function buildServiceModel(slug: string): ServiceModelHandle | null {
+export function buildServiceModel(slug: string, theme: ModelTheme = "light"): ServiceModelHandle | null {
   const build = builders[slug];
   if (!build) return null;
+  const th = THEMES[theme];
+  const lineColor = new THREE.Color(th.line);
   ctx = {
+    surface: new THREE.Color(th.surface),
+    line: lineColor,
+    fade: new THREE.Color(th.fade),
     hi: { value: 0 },
     mats: new Map(),
-    edge: new THREE.LineBasicMaterial({ color: MODEL_COLORS.line, transparent: true, opacity: 0.9 }),
-    edgeKey: new THREE.LineBasicMaterial({ color: MODEL_COLORS.line, transparent: true, opacity: 0.95 }),
+    edge: new THREE.LineBasicMaterial({ color: lineColor, transparent: true, opacity: th.edgeOpacity }),
+    edgeKey: new THREE.LineBasicMaterial({ color: lineColor.clone(), transparent: true, opacity: 0.95 }),
     explode: [],
   };
   const c = ctx;
@@ -369,7 +386,9 @@ export function buildServiceModel(slug: string): ServiceModelHandle | null {
     pivot,
     setState(t: number) {
       c.hi.value = t;
-      c.edge.opacity = 0.9 - 0.55 * t;
+      c.edge.opacity = th.edgeOpacity - 0.55 * t;
+      // no hover, o contorno da peça-chave fica azul-escuro para ler sobre o amarelo
+      c.edgeKey.color.copy(lineColor).lerp(KEY_EDGE, t);
       for (const e of c.explode) e.obj.position.copy(e.base).addScaledVector(e.offset, t);
     },
     dispose() {

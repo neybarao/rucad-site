@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 // Hover (ou, no touch, card na faixa central da tela): para de girar, vai para
 // uma vista isométrica quase sem perspectiva, abre a vista explodida e destaca
 // o elemento-chave em amarelo.
-export default function ServiceModel({ slug }: { slug: string }) {
+export default function ServiceModel({ slug, theme = "light" }: { slug: string; theme?: "light" | "dark" }) {
   const hostRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ServiceModel({ slug }: { slug: string }) {
       } catch {
         return; // sem WebGL: o card continua com o fundo liso
       }
-      const built = buildServiceModel(slug);
+      const built = buildServiceModel(slug, theme);
       if (!built) return;
       const handle = built;
       const model = handle.pivot;
@@ -118,7 +118,8 @@ export default function ServiceModel({ slug }: { slug: string }) {
       };
 
       // ---------------------------------------------------------- interação
-      const card = host.closest(".scard") as HTMLElement | null;
+      // área que reage ao cursor: o card inteiro na home, a coluna do modelo no hero
+      const card = host.closest("[data-model-hover]") as HTMLElement | null;
       const pointer = { x: 0, y: 0 };
       let hover = false;
       let visible = false;
@@ -241,7 +242,7 @@ export default function ServiceModel({ slug }: { slug: string }) {
       lazy.disconnect();
       cleanup?.();
     };
-  }, [slug]);
+  }, [slug, theme]);
 
   return <span ref={hostRef} className="smodel" />;
 }

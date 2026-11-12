@@ -12,7 +12,8 @@ import { articles } from "@/content/articles";
 import type { Service } from "@/content/services";
 import Link from "next/link";
 import { ORG_ID, absoluteUrl } from "@/lib/seo";
-import { getServiceImagePath, getServiceImageSrc } from "@/lib/service-media";
+import { getServiceImagePath } from "@/lib/service-media";
+import ServiceModel from "./ServiceModel";
 
 export default function ServicePage({ service }: { service: Service }) {
   const relatedArticles = articles.filter((article) =>
@@ -20,7 +21,6 @@ export default function ServicePage({ service }: { service: Service }) {
   );
   const url = `${site.domain}/servicos/${service.slug}/`;
   const imagePath = getServiceImagePath(service.slug);
-  const heroImage = getServiceImageSrc(service.slug);
   const serviceLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -58,7 +58,7 @@ export default function ServicePage({ service }: { service: Service }) {
         title={service.title}
         subtitle={service.hero.subtitle}
         compactTop
-        bgImage={heroImage}
+        visual={<ServiceModel slug={service.slug} theme="dark" />}
         actions={<WhatsAppButton message={`Olá, tenho interesse em ${service.title}.`} />}
       />
       <Breadcrumbs items={[
