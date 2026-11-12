@@ -793,11 +793,14 @@ html.no-scroll body {
 /* ============================== Service cards ============================== */
 /* Bento uniforme: mesma moldura, mesma tipografia e mesmo tratamento em todos os
    cards. A hierarquia vem só da área (7/5 na primeira linha, 4/4/4 na segunda).
-   A imagem ocupa o card inteiro; sem imagem, entra um placeholder neutro. */
+   Cada card mostra um modelo 3D em wireframe (ServiceModel) sobre fundo
+   branco-azulado. */
 .sgrid {
+  --scard-bg: #edf2f8;
+  --scard-ink: #0d1f38;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(22rem, auto);
+  grid-auto-rows: minmax(28rem, auto);
   gap: 16px;
 }
 
@@ -805,47 +808,42 @@ html.no-scroll body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   grid-column: span 4;
   border-radius: var(--radius-lg);
   overflow: hidden;
   isolation: isolate;
-  color: var(--text-on-dark);
-  background: var(--blue-800);
+  color: var(--scard-ink);
+  background: var(--scard-bg);
+  border: 1px solid rgba(13, 31, 56, 0.07);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
 .scard--1 { grid-column: span 7; }
 .scard--2 { grid-column: span 5; }
 .scard--1,
-.scard--2 { min-height: 26rem; }
+.scard--2 { min-height: 30rem; }
 
-.scard__media {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+.scard__stage {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-height: 12rem;
 }
 
-.scard__media img {
+.smodel {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+}
+
+.smodel.is-ready { opacity: 1; }
+
+.smodel canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform var(--dur-slow) var(--ease);
-}
-
-.scard__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(2, 9, 19, 0.15) 0%, rgba(2, 9, 19, 0) 22%, rgba(2, 9, 19, 0.62) 56%, rgba(2, 9, 19, 0.94) 100%);
-}
-
-.scard__placeholder {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(160deg, var(--blue-700) 0%, var(--blue-800) 55%, var(--blue-900) 100%);
 }
 
 .scard__arrow {
@@ -857,10 +855,8 @@ html.no-scroll body {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--text-on-dark);
-  background: rgba(2, 9, 19, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(6px);
+  color: var(--scard-ink);
+  border: 1px solid rgba(13, 31, 56, 0.18);
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 
@@ -868,14 +864,14 @@ html.no-scroll body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 28px;
+  padding: 0 28px 28px;
 }
 
 .scard__index {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.875rem;
-  color: var(--brand-secondary);
+  color: var(--blue-600);
 }
 
 .scard__title {
@@ -891,12 +887,12 @@ html.no-scroll body {
   max-width: 44ch;
   font-size: 0.975rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.74);
+  color: rgba(13, 31, 56, 0.68);
 }
 
-.scard:hover .scard__media img,
-.scard:focus-visible .scard__media img {
-  transform: scale(1.04);
+.scard:hover,
+.scard:focus-visible {
+  border-color: rgba(13, 31, 56, 0.16);
 }
 
 .scard:hover .scard__arrow,
@@ -908,24 +904,19 @@ html.no-scroll body {
 }
 
 .scard:focus-visible {
-  outline: 3px solid var(--brand-secondary);
+  outline: 3px solid var(--blue-500);
   outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scard__media img,
-  .scard__arrow {
-    transition: none;
-  }
-  .scard:hover .scard__media img {
-    transform: none;
-  }
+  .scard__arrow,
+  .smodel { transition: none; }
 }
 
 @media (max-width: 1024px) {
   .sgrid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(20rem, auto);
+    grid-auto-rows: minmax(24rem, auto);
   }
   .scard,
   .scard--2 { grid-column: span 1; }
@@ -944,9 +935,10 @@ html.no-scroll body {
   .scard--1,
   .scard--2 {
     grid-column: auto;
-    min-height: 20rem;
+    min-height: 26rem;
   }
-  .scard__copy { padding: 22px; }
+  .scard__stage { min-height: 15rem; }
+  .scard__copy { padding: 0 22px 22px; }
 }
 
 /* ============================== Article cards ============================== */

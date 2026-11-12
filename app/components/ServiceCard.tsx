@@ -1,29 +1,13 @@
 import Link from "next/link";
 import type { Service } from "@/content/services";
-import { getServiceImageSrc } from "@/lib/service-media";
+import ServiceModel from "./ServiceModel";
 
 export default function ServiceCard({ service, index }: { service: Service; index: number }) {
-  const image = getServiceImageSrc(service.slug);
   const number = String(index + 1).padStart(2, "0");
   return (
-    <Link
-      href={`/servicos/${service.slug}`}
-      className={`scard scard--${index + 1} reveal${image ? " scard--has-image" : ""}`}
-    >
-      <span className="scard__media" aria-hidden={image ? undefined : true}>
-        {image ? (
-          <img
-            src={image}
-            alt={service.imageAlt}
-            width={1536}
-            height={1024}
-            loading="lazy"
-            decoding="async"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-          />
-        ) : (
-          <span className="scard__placeholder" />
-        )}
+    <Link href={`/servicos/${service.slug}`} className={`scard scard--${index + 1} reveal`}>
+      <span className="scard__stage" aria-hidden="true">
+        <ServiceModel slug={service.slug} />
       </span>
       <span className="scard__arrow" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

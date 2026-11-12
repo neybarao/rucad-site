@@ -1,6 +1,8 @@
 # Prompts de imagem dos serviços (ChatGPT)
 
-Documento de trabalho. Prompts para gerar as 5 imagens dos cards de serviço, que também viram o fundo do hero de cada página de serviço e a imagem de compartilhamento (OG).
+Documento de trabalho.
+
+> Atualização (11/11/2026): os cards da home passaram a usar modelos 3D em wireframe em vez de fotos. Estas imagens agora são opcionais: se existirem em `public/servicos/`, entram só no fundo do hero de cada página de serviço e na imagem de compartilhamento (OG).
 
 ## Como usar
 

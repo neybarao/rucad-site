@@ -92,10 +92,11 @@ Paginas internas:
 Bento grid minimalista e uniforme (`ServicesGrid` + `ServiceCard`).
 
 - Hierarquia so pela area: primeira linha 7/5 colunas, segunda linha 4/4/4. Tablet 2 colunas com o primeiro card em largura total; mobile 1 coluna.
-- Todos os cards com o mesmo tratamento: imagem full-bleed, degrade escuro no terco inferior, numero em amarelo, titulo, resumo e seta circular no canto superior direito.
-- Amarelo so como sinal: numero e seta no hover. Nenhum card inteiro amarelo.
-- Imagem por servico em `public/servicos/<slug>.webp`, detectada no build. Sem imagem, entra um placeholder azul com grid sutil. A mesma imagem vira fundo do hero da pagina do servico e imagem OG.
-- Prompts de geracao em `content/11-prompts-imagens-servicos.md`.
+- Todos os cards com o mesmo tratamento: fundo branco-azulado (#EDF2F8), modelo 3D no topo, numero em azul, titulo, resumo e seta circular no canto superior direito.
+- Modelos 3D procedurais em wireframe (`ServiceModel` + `lib/three/service-models.ts`): superficie clara, malha azul-escura (#0D1F38) desenhada no shader e contorno nas arestas. Um objeto por servico: galpao com SPDA, painel de media tensao com instrumento de ensaio, poste com cruzeta e transformador, lampada, mesas fotovoltaicas.
+- Interacao: giro lento continuo + inclinacao seguindo o cursor dentro do card. Sem arrastar, para nao competir com o clique do link. Com reduced motion, o giro para.
+- Performance: three.js so e baixado quando a grid se aproxima da tela; o loop para fora da tela e com a aba oculta. Sem WebGL, o card fica so com o fundo liso.
+- Amarelo so como sinal: seta no hover.
 
 ### Conteudos Relacionados
 
