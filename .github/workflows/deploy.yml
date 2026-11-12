@@ -21,9 +21,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      # Domínio próprio na raiz: sem BASE_PATH.
       - run: npm run build
-        env:
-          DEPLOY_TARGET: pages
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

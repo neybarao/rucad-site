@@ -13,9 +13,10 @@ Documento de trabalho. A auditoria só faz sentido depois que o site estiver no 
 - [x] Área de atendimento confirmada: MS e estados vizinhos (MT, GO, MG, SP, PR). Aplicada no schema, no contato e no llms.txt.
 - [x] Horário confirmado: segunda a sexta, 7h30 às 17h30. Aplicado no schema, no contato e no rodapé.
 - [x] Números do StatsBar e logos de clientes confirmados pela Rucad.
-- [ ] Build de produção sem `DEPLOY_TARGET=pages` (sem basePath) e deploy no host do domínio.
+- [x] Domínio apontado para o GitHub Pages; build sem prefixo de caminho (`BASE_PATH` vazio) e `public/CNAME` com o domínio (12/11/2026).
+- [ ] HTTPS do domínio: aguardar o certificado do GitHub Pages e marcar "Enforce HTTPS" em Settings → Pages.
 - [ ] Configurar redirecionamentos 301 das URLs do site antigo para as novas, se o site antigo tiver páginas indexadas. Levantar as URLs antigas no Search Console ou com `site:rucadengenharia.com.br` antes de trocar.
-- [ ] Garantir que o GitHub Pages não fique público como cópia duplicada depois da migração (desativar ou apontar canonical, que já aponta para o domínio final).
+- [x] Sem cópia duplicada: com domínio próprio, o endereço github.io redireciona para o domínio.
 
 ## Depois de publicar (auditoria de indexação)
 
