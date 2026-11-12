@@ -528,8 +528,14 @@ html.no-scroll body {
 
 /* Hero com ilustração (modelo 3D) no lado direito */
 .hero--visual .hero__inner {
-  padding-right: 48%;
+  padding-right: 40%;
   pointer-events: none; /* deixa o cursor chegar no modelo atrás */
+}
+
+/* título menor que o hero padrão para caber 2 a 3 linhas na coluna da esquerda */
+.hero--visual .hero__title {
+  font-size: clamp(2.5rem, 3.4vw, 3.1rem);
+  max-width: 22ch;
 }
 
 .hero--visual .hero__inner > * {
@@ -542,7 +548,7 @@ html.no-scroll body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 52%;
+  width: 48%;
 }
 
 /* gradiente do azul do hero para um azul mais claro atrás do modelo.
