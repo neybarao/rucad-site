@@ -205,42 +205,65 @@ function redes(): THREE.Group {
   return g;
 }
 
-/** Lâmpada LED moderna (formato A60): rosca E27, anel isolante, corpo
- *  dissipador em plástico e bulbo leitoso quase esférico, com a junta aparente. */
+function roundedBox(w: number, h: number, d: number, r: number): THREE.BufferGeometry {
+  const sh = new THREE.Shape();
+  const x = -w / 2, y = -h / 2;
+  sh.moveTo(x + r, y);
+  sh.lineTo(x + w - r, y);
+  sh.quadraticCurveTo(x + w, y, x + w, y + r);
+  sh.lineTo(x + w, y + h - r);
+  sh.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  sh.lineTo(x + r, y + h);
+  sh.quadraticCurveTo(x, y + h, x, y + h - r);
+  sh.lineTo(x, y + r);
+  sh.quadraticCurveTo(x, y, x + r, y);
+  const bevel = Math.min(0.03, r * 0.5);
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: d - bevel * 2, bevelEnabled: true, bevelSize: bevel, bevelThickness: bevel, bevelSegments: 3, curveSegments: 8 });
+  geo.translate(0, 0, -(d - bevel * 2) / 2);
+  return geo;
+}
+
+/** Medidor de energia inteligente: corpo, visor com dígitos, botões, LED de
+ *  pulso, porta óptica, tampa de terminais e cabos de entrada/saída. */
 function eficiencia(): THREE.Group {
   const g = new THREE.Group();
-  const V = (x: number, y: number) => new THREE.Vector2(x, y);
+  const D = 0.36;
+  const front = D / 2;
 
-  // rosca E27 + contato central
-  const screw: THREE.Vector2[] = [V(0, 0), V(0.06, 0), V(0.07, 0.02), V(0.13, 0.03), V(0.16, 0.06)];
-  for (let i = 0; i < 7; i++) {
-    const y = 0.08 + i * 0.05;
-    screw.push(V(0.19, y), V(0.215, y + 0.025));
+  // corpo principal e alça de fixação
+  part(g, roundedBox(0.9, 1.2, D, 0.08), T(10), { pos: [0, 1.1, 0], edges: 35 });
+  part(g, roundedBox(0.26, 0.12, 0.06, 0.04), T(14), { pos: [0, 1.74, -0.1], edges: 35 });
+
+  // visor: moldura rebaixada + tela + dígitos
+  part(g, roundedBox(0.66, 0.3, 0.03, 0.03), T(16), { pos: [0, 1.42, front + 0.005], edges: 35 });
+  part(g, new THREE.BoxGeometry(0.58, 0.22, 0.012), T(30), { pos: [0, 1.42, front + 0.026] });
+  for (let i = 0; i < 6; i++) {
+    part(g, new THREE.BoxGeometry(0.055, 0.11, 0.006), T(40), { pos: [-0.2 + i * 0.075, 1.43, front + 0.034] });
   }
-  screw.push(V(0.19, 0.44), V(0.2, 0.46), V(0, 0.46));
-  part(g, new THREE.LatheGeometry(screw, 48), U(24, 22), { edges: 60 });
+  part(g, new THREE.BoxGeometry(0.1, 0.03, 0.006), T(40), { pos: [0.19, 1.355, front + 0.034] });
 
-  // anel isolante
-  part(g, new THREE.CylinderGeometry(0.205, 0.205, 0.05, 48, 1), U(24, 2), { pos: [0, 0.485, 0] });
+  // botões, LED de pulso e porta óptica
+  for (const x of [-0.27, -0.15]) {
+    part(g, new THREE.CylinderGeometry(0.04, 0.04, 0.03, 24), U(24, 2), { pos: [x, 1.15, front + 0.012], rot: [Math.PI / 2, 0, 0] });
+  }
+  part(g, new THREE.CylinderGeometry(0.018, 0.018, 0.02, 16), U(16, 2), { pos: [0.05, 1.15, front + 0.008], rot: [Math.PI / 2, 0, 0] });
+  part(g, new THREE.TorusGeometry(0.07, 0.016, 10, 32), U(32, 6), { pos: [0.24, 1.13, front + 0.005], edges: false });
+  part(g, new THREE.CylinderGeometry(0.05, 0.05, 0.012, 32), U(32, 2), { pos: [0.24, 1.13, front + 0.004], rot: [Math.PI / 2, 0, 0] });
 
-  // corpo dissipador: abre em curva suave até a junta
-  const body = new THREE.SplineCurve([V(0.21, 0.51), V(0.24, 0.6), V(0.3, 0.72), V(0.38, 0.84), V(0.43, 0.92)]);
-  const bodyPts = [V(0, 0.51), ...body.getPoints(24), V(0.445, 0.935), V(0, 0.935)];
-  part(g, new THREE.LatheGeometry(bodyPts, 56), U(28, 10), { edges: 50 });
+  // placa de identificação
+  part(g, new THREE.BoxGeometry(0.62, 0.16, 0.008), T(26), { pos: [0, 0.86, front + 0.004] });
 
-  // bulbo leitoso
-  const globe = new THREE.SplineCurve([
-    V(0.425, 0.935),
-    V(0.5, 1.0),
-    V(0.585, 1.13),
-    V(0.615, 1.3),
-    V(0.59, 1.48),
-    V(0.5, 1.64),
-    V(0.33, 1.75),
-    V(0.15, 1.795),
-    V(0, 1.8),
-  ]);
-  part(g, new THREE.LatheGeometry([V(0, 0.935), ...globe.getPoints(40)], 56), U(28, 26), { edges: 60 });
+  // tampa de terminais com parafusos de lacre
+  part(g, roundedBox(0.84, 0.3, D * 0.82, 0.05), T(12), { pos: [0, 0.32, -D * 0.05], edges: 35 });
+  for (const x of [-0.3, 0.3]) {
+    part(g, new THREE.CylinderGeometry(0.025, 0.025, 0.02, 16), U(16, 2), { pos: [x, 0.38, front - D * 0.05 - 0.02 + 0.03], rot: [Math.PI / 2, 0, 0] });
+  }
+
+  // cabos saindo por baixo
+  for (let i = 0; i < 4; i++) {
+    const x = -0.27 + i * 0.18;
+    tube(g, [new THREE.Vector3(x, 0.18, 0), new THREE.Vector3(x, -0.05, 0.02), new THREE.Vector3(x * 1.15, -0.25, 0.14), new THREE.Vector3(x * 1.3, -0.4, 0.34)], 0.025);
+  }
   return g;
 }
 
