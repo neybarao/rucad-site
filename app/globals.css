@@ -107,11 +107,45 @@ video {
   padding: 0 var(--gutter);
 }
 
-/* Animation base: elements marked .reveal start hidden only once JS marks the
-   document ready, so no-JS users still see everything. */
-.js-anim .reveal {
+/* Animações de entrada (AnimationProvider). Só o que estava abaixo da dobra
+   fica oculto, e só depois que o JS marca o documento; sem JS, tudo aparece. */
+.js-anim .reveal:not(.is-in) {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(28px);
+}
+
+.js-anim .reveal.is-in:not(.is-instant) {
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: calc(var(--rv-i, 0) * 90ms);
+}
+
+/* Hero: entrada em sequência só com CSS, sem esconder o texto (o título nunca
+   fica com opacidade zero, para não atrasar o LCP). Se a tela de abertura está
+   ativa, a entrada começa quando ela sai. */
+.hero__in {
+  animation: hero-in 0.9s var(--ease) both;
+}
+
+.hero__in:nth-child(2) { animation-delay: 90ms; }
+.hero__in:nth-child(3) { animation-delay: 180ms; }
+.hero__in:nth-child(4) { animation-delay: 270ms; }
+
+.loader-on .hero__in { animation-delay: 1.15s; }
+.loader-on .hero__in:nth-child(2) { animation-delay: 1.24s; }
+.loader-on .hero__in:nth-child(3) { animation-delay: 1.33s; }
+.loader-on .hero__in:nth-child(4) { animation-delay: 1.42s; }
+
+@keyframes hero-in {
+  from {
+    opacity: 0.35;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -119,9 +153,13 @@ video {
     scroll-behavior: auto;
   }
 
-  .js-anim .reveal {
-    opacity: 1 !important;
-    transform: none !important;
+  .js-anim .reveal:not(.is-in) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__in {
+    animation: none;
   }
 }
 
@@ -139,13 +177,20 @@ html.no-scroll body {
   align-items: center;
   justify-content: center;
   background: #0B386F;
-  opacity: 1;
-  transition: opacity 0.7s var(--ease);
+  /* some sozinha por CSS: funciona mesmo sem JavaScript */
+  animation: loading-out 0.7s var(--ease) 1.1s forwards;
 }
 
-.loading--fade {
-  opacity: 0;
-  pointer-events: none;
+.no-loader .loading {
+  display: none;
+}
+
+@keyframes loading-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 .loading__mark {
@@ -170,6 +215,10 @@ html.no-scroll body {
 @media (prefers-reduced-motion: reduce) {
   .loading__mark {
     animation: none;
+  }
+
+  .loading {
+    display: none;
   }
 }
 

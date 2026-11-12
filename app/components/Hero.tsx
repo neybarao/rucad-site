@@ -33,10 +33,10 @@ export default function Hero({ kicker, title, subtitle, actions, dark = true, co
       )}
       {bgImage && <div className="hero__overlay" aria-hidden />}
       <div className="wrap hero__inner">
-        {kicker && <p className="hero__kicker">{kicker}</p>}
-        <h1 className="hero__title">{title}</h1>
-        <p className="hero__subtitle">{subtitle}</p>
-        {actions && <div className="hero__actions">{actions}</div>}
+        {kicker && <p className="hero__kicker hero__in">{kicker}</p>}
+        <h1 className="hero__title hero__in">{title}</h1>
+        <p className="hero__subtitle hero__in">{subtitle}</p>
+        {actions && <div className="hero__actions hero__in">{actions}</div>}
       </div>
       {visual && (
         <div className="hero__visual" data-model-hover aria-hidden="true">

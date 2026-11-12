@@ -140,6 +140,12 @@ Regras:
 
 Movimento deve reforcar energia e precisao, nao atrapalhar performance.
 
+Implementacao atual (sem GSAP):
+
+- Tela de abertura (`LoadingScreen`): so na primeira pagina da visita (sessionStorage), some sozinha por CSS em ~1,8 s, desligada com reduced motion.
+- Hero: entrada em sequencia so com CSS (`.hero__in`), opacidade minima de 0,35 para nao esconder o H1.
+- Secoes (`.reveal` + `AnimationProvider`): IntersectionObserver; o que ja esta na tela ao carregar nunca fica oculto; irmaos entram em sequencia (`--rv-i`).
+
 Permitido:
 
 - contagem de stats;

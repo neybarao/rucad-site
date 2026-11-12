@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import JsonLd from "./components/JsonLd";
+import AnimationProvider from "./components/AnimationProvider";
+import LoadingScreen from "./components/LoadingScreen";
 import { site } from "@/content/site-data";
 import { services } from "@/content/services";
 import { ORG_ID, WEBSITE_ID, DEFAULT_OG_IMAGE, LOGO_URL, absoluteUrl } from "@/lib/seo";
@@ -132,8 +134,17 @@ const orgLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${anek.variable} ${dmSans.variable}`}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${anek.variable} ${dmSans.variable}`}>
       <body>
+        {/* antes da primeira pintura: tela de abertura só na 1ª página da visita */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var d=document.documentElement;if(sessionStorage.getItem('rucad-loader')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('no-loader')}else{d.classList.add('loader-on');sessionStorage.setItem('rucad-loader','1')}}catch(e){}",
+          }}
+        />
+        <LoadingScreen />
+        <AnimationProvider />
         <JsonLd data={orgLd} />
         <Header />
         {children}

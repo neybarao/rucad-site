@@ -1,28 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
 
+// Tela de abertura. Some sozinha por CSS (funciona mesmo sem JavaScript) e só
+// aparece na primeira página da visita: o script inline em layout.tsx marca
+// <html> com "no-loader" nas páginas seguintes. O JS só a remove do DOM depois.
 export default function LoadingScreen() {
-  const [fading, setFading] = useState(false);
   const [gone, setGone] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.add("no-scroll");
-    const t1 = setTimeout(() => setFading(true), 1200);
-    const t2 = setTimeout(() => {
-      setGone(true);
-      document.documentElement.classList.remove("no-scroll");
-    }, 2000);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      document.documentElement.classList.remove("no-scroll");
-    };
+    const t = setTimeout(() => setGone(true), 2200);
+    return () => clearTimeout(t);
   }, []);
 
   if (gone) return null;
 
   return (
-    <div className={`loading ${fading ? "loading--fade" : ""}`} aria-hidden>
+    <div className="loading" aria-hidden>
       <svg
         width="124"
         height="143"
