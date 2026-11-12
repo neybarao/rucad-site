@@ -150,7 +150,7 @@ export default function ParticleSymbol() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 700;
-    const COUNT = small ? 3600 : 8500;
+    const COUNT = small ? 5200 : 12000;
     const sprite = makeSprite();
     // o raio central é a forma mais fina: recebe partículas extras para ter o mesmo brilho
     const points = [...samplePoints(COUNT), ...samplePoints(Math.round(COUNT * 0.12), 2)];
@@ -165,8 +165,8 @@ export default function ParticleSymbol() {
       vx: 0,
       vy: 0,
       phase: Math.random() * Math.PI * 2,
-      speed: 0.6 + Math.random() * 1.2,
-      orbit: 0.3 + Math.random() * 1.1,
+      speed: 0.9 + Math.random() * 1.8,
+      orbit: 0.5 + Math.random() * 1.8,
       size: (Math.random() < 0.05 ? 1.2 + Math.random() * 0.5 : 0.5 + Math.random() * 0.4) * (0.8 + edge * 0.45),
     }));
 
@@ -244,8 +244,8 @@ export default function ParticleSymbol() {
       const lamp = reduceMotion ? 0.7 : 0.6 + 0.4 * (0.5 + 0.5 * Math.sin(t * 2.4));
       const lr = VIEW_W * box.s * 0.75;
       const lg = ctx!.createRadialGradient(cx, cy - box.s * 4, 0, cx, cy - box.s * 4, lr);
-      lg.addColorStop(0, `rgba(170,205,255,${0.16 * lamp * ease})`);
-      lg.addColorStop(0.6, `rgba(120,170,255,${0.06 * lamp * ease})`);
+      lg.addColorStop(0, `rgba(185,215,255,${0.24 * lamp * ease})`);
+      lg.addColorStop(0.6, `rgba(130,180,255,${0.09 * lamp * ease})`);
       lg.addColorStop(1, "rgba(100,150,255,0)");
       ctx!.fillStyle = lg;
       ctx!.fillRect(0, 0, W, H);
@@ -265,10 +265,13 @@ export default function ParticleSymbol() {
         // alvo no símbolo (com respiração em torno do centro)
         let x = cx + (box.x + p.u * VIEW_W * box.s - cx) * breathe;
         let y = cy + (box.y + p.v * VIEW_H * box.s - cy) * breathe;
-        // micro-órbita: as partículas nunca ficam paradas
+        // movimento: micro-órbita própria + ondulação que percorre o contorno
         if (!reduceMotion) {
           x += Math.cos(t * p.speed + p.phase) * p.orbit * unit;
           y += Math.sin(t * p.speed * 1.3 + p.phase) * p.orbit * unit;
+          const flow = (0.5 + p.edge) * unit * 1.6;
+          x += Math.sin(t * 1.9 + p.v * 26 + p.u * 9) * flow;
+          y += Math.cos(t * 1.6 + p.u * 24 - p.v * 7) * flow;
         }
         // entrada: vêm de posições aleatórias
         if (ease < 1) {
@@ -299,8 +302,10 @@ export default function ParticleSymbol() {
         // pulso: onda de brilho que sai do centro
         const dist = Math.hypot(x - cx, y - cy) / (box.s * 10);
         const wave = reduceMotion ? 0.6 : 0.5 + 0.5 * Math.sin(t * 2.4 - dist * 2.2 + p.phase * 0.35);
-        const alpha = Math.min(1, (0.22 + 0.78 * p.edge) * (0.55 + 0.6 * wave) * (0.35 + 0.65 * ease));
-        const size = p.size * (0.9 + wave * 0.3) * Math.min(1.4, Math.max(1, box.s / 12));
+        // cintilação: de tempos em tempos a partícula acende forte por um instante
+        const twinkle = reduceMotion ? 0 : Math.max(0, Math.sin(t * p.speed * 3.1 + p.phase * 7) - 0.92) * 9;
+        const alpha = Math.min(1, ((0.35 + 0.9 * p.edge) * (0.65 + 0.6 * wave) + twinkle) * (0.35 + 0.65 * ease));
+        const size = p.size * (0.9 + wave * 0.3 + twinkle * 0.4) * Math.min(1.4, Math.max(1, box.s / 12));
 
         ctx!.globalAlpha = alpha;
         const s = size * 3.2;
@@ -320,7 +325,9 @@ export default function ParticleSymbol() {
           gctx!.filter = "none";
         }
         ctx!.setTransform(1, 0, 0, 1, 0, 0);
-        ctx!.globalAlpha = 0.9;
+        ctx!.globalAlpha = 1;
+        ctx!.drawImage(glow, 0, 0, canvas.width, canvas.height);
+        ctx!.globalAlpha = 0.45;
         ctx!.drawImage(glow, 0, 0, canvas.width, canvas.height);
       }
       ctx!.globalAlpha = 1;
