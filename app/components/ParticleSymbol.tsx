@@ -18,6 +18,7 @@ const PATHS = [
 type Particle = {
   u: number; // posição alvo normalizada no viewBox (0..1)
   v: number;
+  edge: number; // 1 = na borda, 0 = no miolo
   sx: number; // posição inicial (fração do canvas), para a entrada
   sy: number;
   ox: number; // deslocamento pelo cursor (px), volta por mola
@@ -30,28 +31,92 @@ type Particle = {
   size: number;
 };
 
-function samplePoints(count: number, only?: number): { u: number; v: number }[] {
-  // rasteriza o símbolo num canvas fora da tela e sorteia pixels preenchidos
-  const S = 8; // resolução de amostragem por unidade do viewBox
+type Sample = { u: number; v: number; edge: number };
+
+// Rasteriza o símbolo e sorteia pontos com peso maior perto das bordas
+// (distância até a borda calculada por transformada de distância). Resultado:
+// contorno denso e brilhante, miolo esparso, como uma casca iluminada.
+function samplePoints(count: number, only?: number): Sample[] {
+  const S = 8; // resolução por unidade do viewBox
+  const w = VIEW_W * S, h = VIEW_H * S;
   const c = document.createElement("canvas");
-  c.width = VIEW_W * S;
-  c.height = VIEW_H * S;
+  c.width = w;
+  c.height = h;
   const g = c.getContext("2d");
   if (!g) return [];
   g.scale(S, S);
   g.fillStyle = "#fff";
   PATHS.forEach((d, i) => { if (only === undefined || only === i) g.fill(new Path2D(d)); });
-  const data = g.getImageData(0, 0, c.width, c.height).data;
-  const filled: number[] = [];
-  for (let i = 0; i < c.width * c.height; i++) if (data[i * 4 + 3] > 128) filled.push(i);
-  const pts: { u: number; v: number }[] = [];
+  const data = g.getImageData(0, 0, w, h).data;
+
+  // transformada de distância (chamfer 3-4) até o pixel vazio mais próximo
+  const INF = 1e9;
+  const dist = new Float32Array(w * h);
+  for (let i = 0; i < w * h; i++) dist[i] = data[i * 4 + 3] > 128 ? INF : 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = y * w + x;
+    if (!dist[i]) continue;
+    let m = dist[i];
+    if (x > 0) m = Math.min(m, dist[i - 1] + 3);
+    if (y > 0) {
+      m = Math.min(m, dist[i - w] + 3);
+      if (x > 0) m = Math.min(m, dist[i - w - 1] + 4);
+      if (x < w - 1) m = Math.min(m, dist[i - w + 1] + 4);
+    }
+    dist[i] = m;
+  }
+  for (let y = h - 1; y >= 0; y--) for (let x = w - 1; x >= 0; x--) {
+    const i = y * w + x;
+    if (!dist[i]) continue;
+    let m = dist[i];
+    if (x < w - 1) m = Math.min(m, dist[i + 1] + 3);
+    if (y < h - 1) {
+      m = Math.min(m, dist[i + w] + 3);
+      if (x < w - 1) m = Math.min(m, dist[i + w + 1] + 4);
+      if (x > 0) m = Math.min(m, dist[i + w - 1] + 4);
+    }
+    dist[i] = m;
+  }
+
+  // pesos: borda (distância pequena) pesa muito mais que o miolo
+  const idx: number[] = [];
+  const cum: number[] = [];
+  let total = 0;
+  for (let i = 0; i < w * h; i++) {
+    if (!dist[i]) continue;
+    const d = dist[i] / 3; // em pixels da amostragem
+    total += 0.06 + Math.exp(-d / 2.2);
+    idx.push(i);
+    cum.push(total);
+  }
+  const pick = () => {
+    const r = Math.random() * total;
+    let lo = 0, hi = cum.length - 1;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (cum[mid] < r) lo = mid + 1; else hi = mid; }
+    return idx[lo];
+  };
+
+  const pts: Sample[] = [];
   for (let k = 0; k < count; k++) {
-    const i = filled[Math.floor(Math.random() * filled.length)];
-    const x = (i % c.width) + Math.random();
-    const y = Math.floor(i / c.width) + Math.random();
-    pts.push({ u: x / c.width, v: y / c.height });
+    const i = pick();
+    let x = (i % w) + Math.random();
+    let y = Math.floor(i / w) + Math.random();
+    const d = dist[i] / 3;
+    const edge = Math.exp(-d / 3);
+    // parte das partículas da borda escapa um pouco para fora: halo granulado
+    if (edge > 0.5 && Math.random() < 0.18) {
+      const a = Math.random() * Math.PI * 2;
+      const r = Math.abs(gauss()) * 3.2;
+      x += Math.cos(a) * r;
+      y += Math.sin(a) * r;
+    }
+    pts.push({ u: x / w, v: y / h, edge });
   }
   return pts;
+}
+
+function gauss() {
+  return (Math.random() + Math.random() + Math.random() - 1.5) * 1.6;
 }
 
 function makeSprite(): HTMLCanvasElement {
@@ -85,13 +150,14 @@ export default function ParticleSymbol() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 700;
-    const COUNT = small ? 3200 : 7500;
+    const COUNT = small ? 3600 : 8500;
     const sprite = makeSprite();
     // o raio central é a forma mais fina: recebe partículas extras para ter o mesmo brilho
-    const points = [...samplePoints(COUNT), ...samplePoints(Math.round(COUNT * 0.16), 2)];
-    const particles: Particle[] = points.map(({ u, v }) => ({
+    const points = [...samplePoints(COUNT), ...samplePoints(Math.round(COUNT * 0.12), 2)];
+    const particles: Particle[] = points.map(({ u, v, edge }) => ({
       u,
       v,
+      edge,
       sx: Math.random(),
       sy: Math.random(),
       ox: 0,
@@ -101,8 +167,18 @@ export default function ParticleSymbol() {
       phase: Math.random() * Math.PI * 2,
       speed: 0.6 + Math.random() * 1.2,
       orbit: 0.3 + Math.random() * 1.1,
-      size: Math.random() < 0.07 ? 1.2 + Math.random() * 0.6 : 0.55 + Math.random() * 0.45,
+      size: (Math.random() < 0.05 ? 1.2 + Math.random() * 0.5 : 0.5 + Math.random() * 0.4) * (0.8 + edge * 0.45),
     }));
+
+    // camada de glow: as partículas são desenhadas também num canvas menor que
+    // vai por cima borrado (bloom). Só onde o navegador suporta filtro em canvas.
+    // O borrão é aplicado em baixa resolução (barato) e depois ampliado.
+    const bloom = document.createElement("canvas");
+    const bctx = bloom.getContext("2d");
+    const glow = document.createElement("canvas");
+    const gctx = glow.getContext("2d");
+    const BLOOM_SCALE = 0.33;
+    let hasFilter = !!bctx && !!gctx && "filter" in ctx && !small;
 
     let W = 0, H = 0, dpr = 1;
     let box = { x: 0, y: 0, s: 1 }; // posição e escala do símbolo no canvas
@@ -114,6 +190,8 @@ export default function ParticleSymbol() {
       canvas.height = Math.round(H * dpr);
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
+      bloom.width = glow.width = Math.max(1, Math.round(W * BLOOM_SCALE));
+      bloom.height = glow.height = Math.max(1, Math.round(H * BLOOM_SCALE));
       const s = Math.min((W * 0.92) / VIEW_W, (H * 0.96) / VIEW_H);
       box = { s, x: (W - VIEW_W * s) / 2, y: (H - VIEW_H * s) / 2 };
     };
@@ -133,6 +211,8 @@ export default function ParticleSymbol() {
     zone.addEventListener("pointerleave", onLeave);
 
     let raf = 0;
+    let frameNo = 0;
+    let slowAvg = 1 / 60;
     let visible = false;
     const t0 = performance.now();
     let last = t0;
@@ -141,7 +221,14 @@ export default function ParticleSymbol() {
     function frame(now: number) {
       raf = 0;
       const t = (now - t0) / 1000;
-      const dt = Math.min((now - last) / 1000, 0.05);
+      const rawDt = (now - last) / 1000;
+      const dt = Math.min(rawDt, 0.05);
+      // proteção para máquinas fracas: se a média passar de ~28 ms por quadro
+      // depois da entrada, desliga o glow (as partículas continuam)
+      if (hasFilter && t > INTRO + 0.5 && rawDt < 0.5) {
+        slowAvg = slowAvg * 0.95 + rawDt * 0.05;
+        if (slowAvg > 0.028 && t > INTRO + 2.5) hasFilter = false;
+      }
       last = now;
       const intro = INTRO ? Math.min(1, t / INTRO) : 1;
       const ease = 1 - Math.pow(1 - intro, 3);
@@ -149,10 +236,28 @@ export default function ParticleSymbol() {
 
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx!.clearRect(0, 0, W, H);
-      ctx!.globalCompositeOperation = "lighter";
 
       const cx = box.x + (VIEW_W * box.s) / 2;
       const cy = box.y + (VIEW_H * box.s) / 2;
+
+      // luz de lâmpada atrás do símbolo, pulsando junto com as partículas
+      const lamp = reduceMotion ? 0.7 : 0.6 + 0.4 * (0.5 + 0.5 * Math.sin(t * 2.4));
+      const lr = VIEW_W * box.s * 0.75;
+      const lg = ctx!.createRadialGradient(cx, cy - box.s * 4, 0, cx, cy - box.s * 4, lr);
+      lg.addColorStop(0, `rgba(170,205,255,${0.16 * lamp * ease})`);
+      lg.addColorStop(0.6, `rgba(120,170,255,${0.06 * lamp * ease})`);
+      lg.addColorStop(1, "rgba(100,150,255,0)");
+      ctx!.fillStyle = lg;
+      ctx!.fillRect(0, 0, W, H);
+
+      ctx!.globalCompositeOperation = "lighter";
+      // o glow muda devagar: recalculado a cada 3 quadros, reaproveitado nos outros
+      const redrawGlow = hasFilter && frameNo++ % 3 === 0;
+      if (redrawGlow) {
+        bctx!.setTransform(BLOOM_SCALE, 0, 0, BLOOM_SCALE, 0, 0);
+        bctx!.clearRect(0, 0, W, H);
+        bctx!.globalCompositeOperation = "lighter";
+      }
       const unit = box.s / 6; // escala do movimento fino relativa ao tamanho do símbolo
       const R = Math.max(40, box.s * 5); // raio de influência do cursor
 
@@ -194,12 +299,29 @@ export default function ParticleSymbol() {
         // pulso: onda de brilho que sai do centro
         const dist = Math.hypot(x - cx, y - cy) / (box.s * 10);
         const wave = reduceMotion ? 0.6 : 0.5 + 0.5 * Math.sin(t * 2.4 - dist * 2.2 + p.phase * 0.35);
-        const alpha = Math.min(1, (0.6 + 0.6 * wave) * (0.35 + 0.65 * ease));
+        const alpha = Math.min(1, (0.22 + 0.78 * p.edge) * (0.55 + 0.6 * wave) * (0.35 + 0.65 * ease));
         const size = p.size * (0.9 + wave * 0.3) * Math.min(1.4, Math.max(1, box.s / 12));
 
         ctx!.globalAlpha = alpha;
         const s = size * 3.2;
         ctx!.drawImage(sprite, x - s / 2, y - s / 2, s, s);
+        if (redrawGlow && p.edge > 0.35) {
+          bctx!.globalAlpha = alpha;
+          bctx!.drawImage(sprite, x - s, y - s, s * 2, s * 2);
+        }
+      }
+      if (hasFilter) {
+        // glow: borra a camada de bordas em baixa resolução e amplia por cima, em modo aditivo
+        if (redrawGlow) {
+          gctx!.setTransform(1, 0, 0, 1, 0, 0);
+          gctx!.clearRect(0, 0, glow.width, glow.height);
+          gctx!.filter = "blur(2.5px)";
+          gctx!.drawImage(bloom, 0, 0);
+          gctx!.filter = "none";
+        }
+        ctx!.setTransform(1, 0, 0, 1, 0, 0);
+        ctx!.globalAlpha = 0.9;
+        ctx!.drawImage(glow, 0, 0, canvas.width, canvas.height);
       }
       ctx!.globalAlpha = 1;
       ctx!.globalCompositeOperation = "source-over";
