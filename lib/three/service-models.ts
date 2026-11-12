@@ -205,28 +205,42 @@ function redes(): THREE.Group {
   return g;
 }
 
-/** Lâmpada com rosca: eficiência energética (e eco do símbolo da marca). */
+/** Lâmpada LED moderna (formato A60): rosca E27, anel isolante, corpo
+ *  dissipador em plástico e bulbo leitoso quase esférico, com a junta aparente. */
 function eficiencia(): THREE.Group {
   const g = new THREE.Group();
-  const pts: THREE.Vector2[] = [new THREE.Vector2(0, 0), new THREE.Vector2(0.08, 0), new THREE.Vector2(0.12, 0.03), new THREE.Vector2(0.16, 0.06)];
-  for (let i = 0; i < 8; i++) {
+  const V = (x: number, y: number) => new THREE.Vector2(x, y);
+
+  // rosca E27 + contato central
+  const screw: THREE.Vector2[] = [V(0, 0), V(0.06, 0), V(0.07, 0.02), V(0.13, 0.03), V(0.16, 0.06)];
+  for (let i = 0; i < 7; i++) {
     const y = 0.08 + i * 0.05;
-    pts.push(new THREE.Vector2(0.2, y), new THREE.Vector2(0.225, y + 0.025));
+    screw.push(V(0.19, y), V(0.215, y + 0.025));
   }
-  pts.push(new THREE.Vector2(0.2, 0.5), new THREE.Vector2(0.235, 0.53), new THREE.Vector2(0.24, 0.6));
-  const glass = new THREE.SplineCurve([
-    new THREE.Vector2(0.24, 0.6),
-    new THREE.Vector2(0.3, 0.72),
-    new THREE.Vector2(0.45, 0.92),
-    new THREE.Vector2(0.62, 1.18),
-    new THREE.Vector2(0.69, 1.45),
-    new THREE.Vector2(0.64, 1.75),
-    new THREE.Vector2(0.45, 1.97),
-    new THREE.Vector2(0.2, 2.06),
-    new THREE.Vector2(0, 2.08),
+  screw.push(V(0.19, 0.44), V(0.2, 0.46), V(0, 0.46));
+  part(g, new THREE.LatheGeometry(screw, 48), U(24, 22), { edges: 60 });
+
+  // anel isolante
+  part(g, new THREE.CylinderGeometry(0.205, 0.205, 0.05, 48, 1), U(24, 2), { pos: [0, 0.485, 0] });
+
+  // corpo dissipador: abre em curva suave até a junta
+  const body = new THREE.SplineCurve([V(0.21, 0.51), V(0.24, 0.6), V(0.3, 0.72), V(0.38, 0.84), V(0.43, 0.92)]);
+  const bodyPts = [V(0, 0.51), ...body.getPoints(24), V(0.445, 0.935), V(0, 0.935)];
+  part(g, new THREE.LatheGeometry(bodyPts, 56), U(28, 10), { edges: 50 });
+
+  // bulbo leitoso
+  const globe = new THREE.SplineCurve([
+    V(0.425, 0.935),
+    V(0.5, 1.0),
+    V(0.585, 1.13),
+    V(0.615, 1.3),
+    V(0.59, 1.48),
+    V(0.5, 1.64),
+    V(0.33, 1.75),
+    V(0.15, 1.795),
+    V(0, 1.8),
   ]);
-  pts.push(...glass.getPoints(40).slice(1));
-  part(g, new THREE.LatheGeometry(pts, 56), U(28, 44), { edges: 60 });
+  part(g, new THREE.LatheGeometry([V(0, 0.935), ...globe.getPoints(40)], 56), U(28, 26), { edges: 60 });
   return g;
 }
 
