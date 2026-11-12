@@ -566,7 +566,7 @@ html.no-scroll body {
 /* símbolo da marca em partículas (hero da página Sobre) */
 .psymbol {
   position: absolute;
-  inset: 6rem 0 0 0;
+  inset: 8rem 0 1rem 0; /* começa abaixo do header */
   display: block;
 }
 

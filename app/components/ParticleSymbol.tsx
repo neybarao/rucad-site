@@ -61,10 +61,11 @@ function makeSprite(): HTMLCanvasElement {
   c.width = c.height = s;
   const g = c.getContext("2d")!;
   const grad = g.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+  // núcleo branco bem definido e halo curto: ponto pequeno e brilhante
   grad.addColorStop(0, "rgba(255,255,255,1)");
-  grad.addColorStop(0.18, "rgba(255,255,255,0.9)");
-  grad.addColorStop(0.45, "rgba(190,220,255,0.25)");
-  grad.addColorStop(1, "rgba(160,200,255,0)");
+  grad.addColorStop(0.28, "rgba(255,255,255,1)");
+  grad.addColorStop(0.45, "rgba(225,240,255,0.5)");
+  grad.addColorStop(1, "rgba(180,215,255,0)");
   g.fillStyle = grad;
   g.fillRect(0, 0, s, s);
   return c;
@@ -84,7 +85,7 @@ export default function ParticleSymbol() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 700;
-    const COUNT = small ? 1600 : 3200;
+    const COUNT = small ? 3200 : 7500;
     const sprite = makeSprite();
     // o raio central é a forma mais fina: recebe partículas extras para ter o mesmo brilho
     const points = [...samplePoints(COUNT), ...samplePoints(Math.round(COUNT * 0.16), 2)];
@@ -100,7 +101,7 @@ export default function ParticleSymbol() {
       phase: Math.random() * Math.PI * 2,
       speed: 0.6 + Math.random() * 1.2,
       orbit: 0.3 + Math.random() * 1.1,
-      size: Math.random() < 0.08 ? 1.9 + Math.random() * 1.2 : 0.9 + Math.random() * 0.9,
+      size: Math.random() < 0.07 ? 1.2 + Math.random() * 0.6 : 0.55 + Math.random() * 0.45,
     }));
 
     let W = 0, H = 0, dpr = 1;
@@ -113,7 +114,7 @@ export default function ParticleSymbol() {
       canvas.height = Math.round(H * dpr);
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
-      const s = Math.min((W * 0.62) / VIEW_W, (H * 0.74) / VIEW_H);
+      const s = Math.min((W * 0.92) / VIEW_W, (H * 0.96) / VIEW_H);
       box = { s, x: (W - VIEW_W * s) / 2, y: (H - VIEW_H * s) / 2 };
     };
     resize();
@@ -193,11 +194,11 @@ export default function ParticleSymbol() {
         // pulso: onda de brilho que sai do centro
         const dist = Math.hypot(x - cx, y - cy) / (box.s * 10);
         const wave = reduceMotion ? 0.6 : 0.5 + 0.5 * Math.sin(t * 2.4 - dist * 2.2 + p.phase * 0.35);
-        const alpha = (0.18 + 0.82 * wave * wave) * (0.35 + 0.65 * ease);
-        const size = p.size * (0.85 + wave * 0.35) * Math.max(1, box.s / 9);
+        const alpha = Math.min(1, (0.6 + 0.6 * wave) * (0.35 + 0.65 * ease));
+        const size = p.size * (0.9 + wave * 0.3) * Math.min(1.4, Math.max(1, box.s / 12));
 
         ctx!.globalAlpha = alpha;
-        const s = size * 4;
+        const s = size * 3.2;
         ctx!.drawImage(sprite, x - s / 2, y - s / 2, s, s);
       }
       ctx!.globalAlpha = 1;
