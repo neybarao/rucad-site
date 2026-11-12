@@ -6,7 +6,7 @@ export const site = {
   phoneRaw: "5567996506767",
   email: "projetos@rucadengenharia.com.br",
   cnpj: "44.499.587/0001-09",
-  address: "Avenida Doutor Gunter Hans, 3281, Campo Grande, MS, 79085-108",
+  address: "Avenida Doutor Gunter Hans, 3281, Aero Rancho, Campo Grande, MS, 79085-108",
   addressStreet: "Avenida Doutor Gunter Hans, 3281",
   addressLocality: "Campo Grande",
   addressRegion: "MS",
@@ -25,6 +25,8 @@ export const site = {
   social: {
     instagram: "https://www.instagram.com/rucadengenharia/",
     linkedin: "https://www.linkedin.com/company/rucad-engenharia/",
+    // Perfil da Empresa no Google (ID do Knowledge Graph)
+    google: "https://www.google.com/search?kgmid=/g/11q3ycr4xt",
   },
   stats: [
     { value: "1.405", label: "postes implantados em campo", countTo: 1405 },

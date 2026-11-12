@@ -6,6 +6,9 @@ import Pillars from "./components/Pillars";
 import ProcessSteps from "./components/ProcessSteps";
 import CtaSection from "./components/CtaSection";
 import Marquee from "./components/Marquee";
+import Faq from "./components/Faq";
+import JsonLd from "./components/JsonLd";
+import { homeFaq } from "@/content/home-faq";
 import Reveal from "./components/Reveal";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Link from "next/link";
@@ -73,9 +76,23 @@ export default function Home() {
         <ProcessSteps steps={homeSteps} />
       </Section>
 
+      <Section>
+        <Reveal as="div"><h2 className="section__title reveal">Perguntas frequentes</h2></Reveal>
+        <div style={{ height: 24 }} />
+        <Faq items={homeFaq} />
+      </Section>
+
       <CtaSection
         title="Tem uma demanda elétrica? A gente resolve."
         body="Fale com um engenheiro da Rucad. Levantamento no local e proposta com prazo e responsável técnico definidos."
+      />
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: homeFaq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        }}
       />
     </main>
   );

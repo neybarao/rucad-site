@@ -4,8 +4,12 @@ Documento de trabalho. A auditoria só faz sentido depois que o site estiver no 
 
 ## Antes de publicar
 
+- [x] `public/hero-bg.png` (7,9 MB, sem uso) removido.
+- [x] FAQ na home e nomes dos clientes em texto.
+- [x] 9 artigos novos da estratégia editorial (fatos normativos conferidos em 11/11/2026; ver cabeçalho de `content/articles-extra.ts`).
+
 - [ ] (Opcional) Imagens de preview por serviço. Os cards e heros usam os modelos 3D.
-- [ ] Preencher `datePublished` nos artigos de `content/articles.ts` com a data real de publicação.
+- [x] `datePublished` preenchido com 2026-11-12 em todos os artigos (`content/articles.ts` e `content/articles-extra.ts`). Se a publicação for em outra data, trocar a constante `PUBLISHED` e a data do checklist de subestação.
 - [x] Área de atendimento confirmada: MS e estados vizinhos (MT, GO, MG, SP, PR). Aplicada no schema, no contato e no llms.txt.
 - [x] Horário confirmado: segunda a sexta, 7h30 às 17h30. Aplicado no schema, no contato e no rodapé.
 - [x] Números do StatsBar e logos de clientes confirmados pela Rucad.
@@ -35,7 +39,8 @@ Documento de trabalho. A auditoria só faz sentido depois que o site estiver no 
 - [ ] Depois de ~28 dias de tráfego, olhar Core Web Vitals no Search Console.
 
 ### Presença local
-- [ ] Perfil da Empresa no Google (Google Business Profile) com o mesmo nome, endereço e telefone do site, link para o site e categoria de engenharia elétrica. Costuma pesar muito em buscas como "engenharia elétrica Campo Grande".
+- [x] Perfil da Empresa no Google existe (12 avaliações, nota 5). Nome, endereço, telefone e horário batem com o site. Link incluído no schema (`sameAs`).
+- [ ] No painel do perfil: trocar a categoria principal de "Empreiteira" para uma de engenharia elétrica, apontar o campo Site para o domínio novo e conferir o horário de segunda a sexta, 7h30 às 17h30.
 
 ### Busca com IA
 - [ ] Conferir se `/llms.txt` e `/robots.txt` respondem no domínio final.

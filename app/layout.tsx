@@ -117,7 +117,7 @@ const orgLd = {
           },
         })),
       },
-      sameAs: [site.social.instagram, site.social.linkedin],
+      sameAs: [site.social.instagram, site.social.linkedin, site.social.google],
     },
     {
       "@type": "WebSite",

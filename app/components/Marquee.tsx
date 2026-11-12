@@ -1,18 +1,18 @@
 const logos = [
-  { name: "logo-suzano", width: 171 },
-  { name: "logo-bracell", width: 177 },
-  { name: "logo-energisa", width: 123 },
-  { name: "logo-gpa", width: 78 },
-  { name: "logo-drogasil", width: 214 },
-  { name: "logo-paguemenos", width: 345 },
-  { name: "logo-madero", width: 137 },
-  { name: "logo-origo", width: 122 },
-  { name: "logo-cel", width: 141 },
-  { name: "logo-ivi", width: 115 },
-  { name: "logo-vetorial", width: 156 },
-  { name: "logo-brasilaocubo", width: 163 },
-  { name: "logo-tatubola", width: 84 },
-  { name: "logo-crecims", width: 167 },
+  { name: "logo-suzano", label: "Suzano", width: 171 },
+  { name: "logo-bracell", label: "Bracell", width: 177 },
+  { name: "logo-energisa", label: "Energisa", width: 123 },
+  { name: "logo-gpa", label: "GPA", width: 78 },
+  { name: "logo-drogasil", label: "Drogasil", width: 214 },
+  { name: "logo-paguemenos", label: "Pague Menos", width: 345 },
+  { name: "logo-madero", label: "Grupo Madero", width: 137 },
+  { name: "logo-origo", label: "Origo Energia", width: 122 },
+  { name: "logo-cel", label: "CEL Engenharia", width: 141 },
+  { name: "logo-ivi", label: "ivi energia", width: 115 },
+  { name: "logo-vetorial", label: "Vetorial", width: 156 },
+  { name: "logo-brasilaocubo", label: "Brasil ao Cubo", width: 163 },
+  { name: "logo-tatubola", label: "Tatu Bola", width: 84 },
+  { name: "logo-crecims", label: "CRECI-MS", width: 167 },
 ];
 
 export default function Marquee() {
@@ -22,13 +22,13 @@ export default function Marquee() {
     <section className="marquee-sec">
       <div className="marquee" aria-label="Clientes da Rucad">
         <div className="marquee__track">
-          {items.map(({ name, width }, i) => (
+          {items.map(({ name, label, width }, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={`${name}-${i}`}
               className="marquee__logo"
               src={`${base}/clientes/${name}.svg`}
-              alt={name.replace("logo-", "")}
+              alt={i >= logos.length ? "" : label}
               aria-hidden={i >= logos.length}
               width={width}
               height={40}

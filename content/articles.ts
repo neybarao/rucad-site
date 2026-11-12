@@ -1,4 +1,5 @@
 import type { Faq } from "./services";
+import { extraArticles } from "./articles-extra";
 
 export type ArticleSection = {
   title: string;
@@ -30,7 +31,7 @@ export type Article = {
   };
 };
 
-export const articles: Article[] = [
+const baseArticles: Article[] = [
   {
     slug: "checklist-instalacao-subestacao",
     title: "Checklist para instalação de subestação",
@@ -45,6 +46,7 @@ export const articles: Article[] = [
     summary:
       "Na instalação de uma subestação, o cliente deve conferir se a entrega inclui documentação técnica, ART, comissionamento, ensaios aplicáveis e registros de segurança. Esses itens ajudam a reduzir risco de retrabalho, falha de proteção, parada não programada e dificuldade em auditorias, fiscalizações ou futuras manutenções.",
     primaryKeyword: "instalação de subestação",
+    datePublished: "2026-11-12",
     secondaryKeywords: [
       "comissionamento de subestação",
       "ART de subestação",
@@ -140,6 +142,8 @@ export const articles: Article[] = [
     },
   },
 ];
+
+export const articles: Article[] = [...baseArticles, ...extraArticles];
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((article) => article.slug === slug);

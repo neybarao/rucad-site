@@ -1,6 +1,7 @@
 import { site } from "@/content/site-data";
 import { services } from "@/content/services";
 import { articles } from "@/content/articles";
+import { clientNames } from "@/content/home-faq";
 
 export const dynamic = "force-static";
 
@@ -40,6 +41,7 @@ export function GET() {
     `- Endereço: ${site.address}.`,
     `- Área de atendimento: ${site.serviceArea.display}.`,
     `- Horário: ${site.hours.display}.`,
+    `- Clientes: ${clientNames.join(", ")}.`,
     `- CNPJ: ${site.cnpj}.`,
     "",
   );
