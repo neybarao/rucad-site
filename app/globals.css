@@ -768,6 +768,19 @@ html.no-scroll body {
   min-width: 0;
 }
 
+/* Com JS, os valores ficam ocultos até o StatsBar zerar a contagem (evita mostrar
+   o valor final e depois pular para zero). Se o JS falhar, aparecem em 2,5 s.
+   As classes loader-on / no-loader só existem quando o script inline rodou. */
+.loader-on .statsbar:not(.is-ready) .stat__value,
+.no-loader .statsbar:not(.is-ready) .stat__value {
+  visibility: hidden;
+  animation: stat-fallback 0s linear 2.5s forwards;
+}
+
+@keyframes stat-fallback {
+  to { visibility: visible; }
+}
+
 .stat__value {
   font-family: var(--font-heading);
   font-weight: 700;

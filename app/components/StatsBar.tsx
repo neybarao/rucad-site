@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type Stat = {
   value: string;
@@ -16,39 +16,21 @@ function formatStatValue(value: number, decimals = 0, suffix = "") {
   }).format(value)}${suffix}`;
 }
 
-// O HTML sai do build com o valor real (é o que buscadores e robôs de IA leem,
-// muitos sem rodar JavaScript). No navegador, se a faixa ainda está fora da
-// tela, o número zera sem ninguém ver e conta até o valor quando aparece.
-function useCountUp(stat: Stat, active: boolean, offscreen: boolean) {
-  const countTo = stat.countTo;
-  const [text, setText] = useState(stat.value);
+const zeroOf = (s: Stat) =>
+  typeof s.countTo === "number" ? formatStatValue(0, s.decimals, s.suffix) : s.value.replace(/\d/g, "0");
 
-  useEffect(() => {
-    if (!offscreen || active) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setText(typeof countTo === "number" ? formatStatValue(0, stat.decimals, stat.suffix) : stat.value.replace(/[\d]/g, "0"));
-  }, [offscreen, active, countTo, stat.decimals, stat.suffix, stat.value]);
-
-  useEffect(() => {
-    if (!active || !offscreen) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setText(stat.value); return; }
-    if (typeof countTo !== "number") { setText(stat.value); return; }
-
-    let raf = 0; const start = performance.now(); const dur = 1200;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setText(formatStatValue(countTo * eased, stat.decimals, stat.suffix));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [active, offscreen, countTo, stat.decimals, stat.suffix, stat.value]);
-  return text;
-}
-
-function StatItem({ active, offscreen, ...stat }: Stat & { active: boolean; offscreen: boolean }) {
-  const shown = useCountUp(stat, active, offscreen);
+// Faixa de números.
+// - O HTML sai do build com o valor real: é o que buscadores e robôs de IA leem.
+// - No navegador, antes da primeira pintura com JS, os valores zeram (escondidos
+//   por CSS até esse momento, para não piscar) e contam até o valor real quando a
+//   faixa aparece na tela. Se a tela de abertura está ativa, espera ela sair.
+// - Com prefers-reduced-motion, mostra o valor final direto.
+function StatItem({ stat, progress }: { stat: Stat; progress: number | null }) {
+  let shown = stat.value;
+  if (progress !== null) {
+    if (typeof stat.countTo === "number") shown = progress >= 1 ? stat.value : formatStatValue(stat.countTo * progress, stat.decimals, stat.suffix);
+    else shown = progress >= 1 ? stat.value : zeroOf(stat);
+  }
   return (
     <div className="stat">
       <div className="stat__value">{shown}</div>
@@ -59,30 +41,56 @@ function StatItem({ active, offscreen, ...stat }: Stat & { active: boolean; offs
 
 export default function StatsBar({ stats }: { stats: readonly Stat[] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
-  const [offscreen, setOffscreen] = useState(false);
+  // null = valor real (HTML do build); 0..1 = progresso da contagem
+  const [progress, setProgress] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setProgress(0);
+    el.classList.add("is-ready");
+  }, []);
+
   useEffect(() => {
-    const el = ref.current; if (!el) return;
-    // só anima se a faixa começou fora da tela; se já está visível, fica o valor real
-    setOffscreen(el.getBoundingClientRect().top > window.innerHeight);
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
     let timer = 0;
-    const startCount = () => {
-      timer = window.setTimeout(() => setActive(true), 180);
+
+    const run = () => {
+      const start = performance.now();
+      const dur = 1400;
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - start) / dur);
+        setProgress(1 - Math.pow(1 - p, 3));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
     };
+
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { startCount(); io.disconnect(); } },
-      { threshold: 0.4 }
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        // com a tela de abertura ativa, começa quando ela some (~1,3 s do carregamento)
+        const loaderOn = document.documentElement.classList.contains("loader-on");
+        const wait = loaderOn ? Math.max(0, 1300 - performance.now()) : 0;
+        timer = window.setTimeout(run, wait + 150);
+      },
+      { threshold: 0.4 },
     );
     io.observe(el);
     return () => {
       io.disconnect();
       window.clearTimeout(timer);
+      cancelAnimationFrame(raf);
     };
   }, []);
+
   return (
     <div className="statsbar" ref={ref}>
       <div className="wrap statsbar__grid">
-        {stats.map((s, i) => <StatItem key={i} {...s} active={active} offscreen={offscreen} />)}
+        {stats.map((s, i) => <StatItem key={i} stat={s} progress={progress} />)}
       </div>
     </div>
   );
