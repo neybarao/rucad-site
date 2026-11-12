@@ -563,6 +563,15 @@ html.no-scroll body {
   top: 6rem; /* abaixo do header */
 }
 
+/* símbolo da marca em partículas (hero da página Sobre) */
+.psymbol {
+  position: absolute;
+  inset: 6rem 0 0 0;
+  display: block;
+}
+
+.psymbol canvas { display: block; }
+
 .hero__kicker {
   font-family: var(--font-heading);
   font-weight: 600;
@@ -664,7 +673,8 @@ html.no-scroll body {
     margin-top: 1.5rem;
   }
 
-  .hero__visual .smodel {
+  .hero__visual .smodel,
+  .hero__visual .psymbol {
     top: 0;
   }
 

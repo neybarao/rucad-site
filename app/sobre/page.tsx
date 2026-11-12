@@ -8,6 +8,7 @@ import ProcessSteps from "@/app/components/ProcessSteps";
 import CtaSection from "@/app/components/CtaSection";
 import Marquee from "@/app/components/Marquee";
 import Reveal from "@/app/components/Reveal";
+import ParticleSymbol from "@/app/components/ParticleSymbol";
 import { site } from "@/content/site-data";
 import { services } from "@/content/services";
 
@@ -39,6 +40,7 @@ export default function Sobre() {
         kicker="SOBRE A RUCAD"
         title="Engenharia elétrica, do projeto à energização."
         subtitle="A Rucad projeta, executa, ensaia e documenta instalações elétricas de baixa e média tensão para indústrias, construtoras, distribuidoras e propriedades rurais."
+        visual={<ParticleSymbol />}
       />
 
       <Section>
