@@ -421,7 +421,7 @@ export const extraArticles: Article[] = [
   {
     slug: "laudo-spda",
     title: "SPDA: o que é, quando é exigido e por que o laudo importa",
-    seoTitle: "SPDA e Laudo de Para-raios: Guia NBR 5419",
+    seoTitle: "Laudo SPDA e Para-raios: NBR 5419",
     metaDescription:
       "Entenda o que é SPDA, como a NBR 5419:2026 define a necessidade de proteção e o que o laudo de para-raios deve conter. Guia técnico da Rucad.",
     hero: {

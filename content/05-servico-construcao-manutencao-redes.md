@@ -6,8 +6,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Construção de Redes e Subestações · Rucad Engenharia`
-- **Meta description:** `Construção, expansão e manutenção de redes de distribuição de baixa e média tensão, subestações e loteamentos. Equipe e equipamentos próprios, do rural ao urbano.`
+- **Title:** `Redes e subestações em MS · Rucad Engenharia`
+- **Meta description:** `Construção, expansão e manutenção de redes de distribuição de baixa e média tensão, subestações e loteamentos em Mato Grosso do Sul. Equipe e equipamentos próprios, do rural ao urbano.`
 - **H1:** Construção e Manutenção de Redes Elétricas
 - **Palavra-chave principal:** construção de redes elétricas
 - **Secundárias:** rede de distribuição, subestação de média tensão, manutenção de subestação, rede de loteamento, eletrificação rural
@@ -68,7 +68,7 @@
 **Vocês têm equipe e equipamento próprios?**
 Sim. Trabalhamos com equipe qualificada e lastro de equipamentos próprios, o que dá agilidade e reduz o risco de parada por falta de terceiros.
 
-**Atendem obras no interior?**
+**Atendem obras no interior de MS?**
 Sim. Nossa equipe se desloca até o local da obra, inclusive no interior, para levantamento e execução.
 
 **Fazem a rede de loteamento e a regularização com a concessionária?**

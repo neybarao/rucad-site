@@ -7,10 +7,11 @@
 
 ## Bloco SEO
 
-- **Title:** `Rucad Engenharia · Soluções em engenharia elétrica`
-- **Meta description:** `Projetos, laudos, redes de distribuição, subestações e usinas solares. Engenharia elétrica que entrega no prazo, com responsável técnico do começo ao fim.`
+- **Title:** `Engenharia elétrica em Campo Grande e MS · Rucad`
+- **Meta description:** `Projetos, laudos, redes, subestações e usinas solares em Campo Grande e Mato Grosso do Sul. Engenharia elétrica que entrega no prazo, com responsável técnico do começo ao fim.`
 - **H1:** Engenharia elétrica que não pára.
 - **Palavra-chave principal:** engenharia elétrica
+- **Secundárias:** engenharia elétrica Campo Grande MS, empresa de engenharia elétrica em MS
 
 ---
 
@@ -29,16 +30,9 @@
 
 ---
 
-## Seção 2 · Prova rápida (barra de números)
+<!-- nota: seção removida até haver números confirmados. Não publicar. Ver 00-estrategia-seo.md. -->
 
-Linha curta de credibilidade, logo abaixo do hero.
-
-- **+500+** projetos realizados
-- **+200km** rede média tensão executada [INFORMAÇÃO A CONFIRMAR]
-- **100%** de entregas no prazo contratual [INFORMAÇÃO A CONFIRMAR]
-- **100%** da equipe certificada [INFORMAÇÃO A CONFIRMAR]
-
-> Nota de revisão: substituir "satisfação 100%" do site atual por uma prova mais concreta e verificável (entrega no prazo). Confirmar os números reais.
+## Seção 2 · Prova rápida (removida)
 
 ---
 
@@ -48,7 +42,7 @@ Frase-ponte curta que fala com a dor antes de listar serviços.
 
 **Título:** Um parceiro para toda a demanda elétrica.
 
-**Texto:** Da rede da fazenda à subestação da indústria, do loteamento ao laudo que libera a fiscalização. Você resolve tudo com uma empresa só, sem gerenciar vários fornecedores e sem correr atrás da concessionária. A gente cuida do projeto, da execução e da documentação.
+**Texto:** Da rede da fazenda à subestação da indústria, em Mato Grosso do Sul, do loteamento ao laudo que libera a fiscalização. Você resolve tudo com uma empresa só, sem gerenciar vários fornecedores e sem correr atrás da concessionária. A gente cuida do projeto, da execução e da documentação.
 
 ---
 
@@ -85,7 +79,7 @@ Cada card leva à página de serviço correspondente.
 Os três pilares, aplicados de forma concreta.
 
 - **Técnica.** Corpo técnico qualificado e equipamentos próprios. Cada obra tem responsável técnico e ART. Sem improviso.
-- **Confiável.** Prazo e responsável definidos desde o dia 1. Entregamos no prazo contratual, muitas vezes antes.
+- **Confiável.** Prazo e responsável definidos desde o dia 1.
 - **Ousada.** Enquanto outros param, a Rucad continua. É assim que se constrói referência.
 
 ---
@@ -130,8 +124,7 @@ Espaço reservado para depoimento quando houver material:
 - Logo Rucad + "Sua demanda, nossa solução."
 - Navegação: Home · Serviços (com as 5 sub-rotas) · Sobre · Contato
 - Contato: (67) 99650-6767 · projetos@rucadengenharia.com.br
-- Endereço: [ENDEREÇO A CONFIRMAR]
-- CREA-MS: [NÚMERO A CONFIRMAR]
+- Endereço: Av. Gunter Hans, 3281, Conjunto Aero Rancho, CEP 79085-108, Campo Grande/MS
 - Redes sociais: 
   - Instagram: https://www.instagram.com/rucadengenharia/
   - LinkedIn: https://www.linkedin.com/company/rucad-engenharia/

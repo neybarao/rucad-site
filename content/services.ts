@@ -107,7 +107,7 @@ export const services: Service[] = [
       { title: "Prazo cumprido", body: "Laudo no prazo combinado, para não parar a fiscalização nem a planta." },
       { title: "Relatório claro", body: "Documento objetivo, sem enrolação, com o que precisa ser feito quando algo está fora de conformidade." },
       { title: "Quem conhece indústria", body: "Equipe com experiência industrial, que entende o ritmo de uma planta que não pode parar." },
-      { title: "CREA ativo e ART", body: "Responsável técnico registrado e ART emitida, do jeito que a fiscalização exige." },
+      { title: "Responsável técnico e ART", body: "Engenheiro responsável identificado e ART emitida, do jeito que a fiscalização exige." },
     ],
     faq: [
       { q: "Que tipos de laudo vocês emitem?", a: "Laudos de SEP, UFV e SPDA, além de ensaios elétricos periódicos e comissionamento. Todos com relatório técnico e ART." },
@@ -115,7 +115,7 @@ export const services: Service[] = [
       { q: "Vocês fazem o laudo periódico obrigatório?", a: "Sim. Executamos o laudo periódico e podemos acompanhar as renovações no prazo, para você não ser pego pela fiscalização." },
       { q: "Precisam parar a planta para fazer os ensaios?", a: "Planejamos a execução para reduzir ao máximo o impacto na operação. Definimos janela e escopo junto com a sua equipe de manutenção." },
       { q: "Se o laudo apontar não conformidade, vocês resolvem?", a: "Apontamos com clareza o que está fora da norma e damos suporte à adequação. A Rucad também executa os serviços de correção quando necessário." },
-      { q: "Quem assina o laudo?", a: "O engenheiro responsável, com CREA ativo e ART emitida." },
+      { q: "Quem assina o laudo?", a: "O engenheiro responsável, com ART emitida." },
     ],
     cta: {
       title: "Precisa de laudo ou está com fiscalização à vista?",

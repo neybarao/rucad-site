@@ -48,7 +48,7 @@ export default function Sobre() {
           <Reveal as="div" className="profile__text">
             <h2 className="section__title reveal">Perfil da empresa</h2>
             <p className="section__lead reveal">
-              A Rucad Engenharia é uma empresa de engenharia elétrica sediada em {site.addressLocality} ({site.addressRegion}). O nome vem das iniciais dos sócios fundadores: Ruffo, Carvalho e Delatori.
+              A Rucad Engenharia é uma empresa de engenharia elétrica sediada em {site.addressLocality} ({site.addressRegion}).
             </p>
             <p className="section__lead reveal">
               A empresa atua em todo o ciclo da instalação elétrica: projeto e SPDA, construção e manutenção de redes e subestações, usinas fotovoltaicas, eficiência energética, ensaios, comissionamento e laudos técnicos. Uma única contratada responde pela demanda, do levantamento à documentação final.

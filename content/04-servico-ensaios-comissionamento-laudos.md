@@ -6,8 +6,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Laudo Elétrico, Ensaios e Comissionamento · Rucad`
-- **Meta description:** `Laudos e ensaios de SEP, UFV e SPDA, comissionamento e apoio à conformidade NR-10. A documentação que libera a operação e a fiscalização.`
+- **Title:** `Laudo elétrico e ensaios em MS · Rucad`
+- **Meta description:** `Laudos e ensaios de SEP, UFV e SPDA, comissionamento e apoio à conformidade NR-10 em Mato Grosso do Sul. A documentação que libera a operação e a fiscalização.`
 - **H1:** Ensaios, Comissionamento e Laudos Técnicos
 - **Palavra-chave principal:** laudo elétrico
 - **Secundárias:** comissionamento elétrico, laudo SPDA, ensaio SEP, laudo NR-10, laudo periódico
@@ -59,8 +59,8 @@
 
 - **Prazo cumprido.** Laudo no prazo combinado, para não parar a fiscalização nem a planta.
 - **Relatório claro.** Documento objetivo, sem enrolação, com o que precisa ser feito quando algo está fora de conformidade.
-- **Quem conhece indústria.** Equipe com experiência industrial, que entende o ritmo de uma planta que não pode parar.
-- **CREA ativo e ART.** Responsável técnico registrado e ART emitida, do jeito que a fiscalização exige.
+- **Quem conhece indústria.** Equipe com experiência industrial em Mato Grosso do Sul, que entende o ritmo de uma planta que não pode parar.
+- **Responsável técnico e ART.** Responsável técnico registrado e ART emitida, do jeito que a fiscalização exige.
 
 ---
 
@@ -82,7 +82,7 @@ Planejamos a execução para reduzir ao máximo o impacto na operação. Definim
 Apontamos com clareza o que está fora da norma e damos suporte à adequação. A Rucad também executa os serviços de correção quando necessário.
 
 **Quem assina o laudo?**
-O engenheiro responsável, com CREA ativo e ART emitida.
+O engenheiro responsável, com registro profissional e ART emitida.
 
 ---
 

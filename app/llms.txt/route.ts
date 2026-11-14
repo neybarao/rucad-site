@@ -2,6 +2,7 @@ import { site } from "@/content/site-data";
 import { services } from "@/content/services";
 import { articles } from "@/content/articles";
 import { clientNames } from "@/content/home-faq";
+import { mdPath } from "@/lib/markdown";
 
 export const dynamic = "force-static";
 
@@ -11,6 +12,8 @@ export const dynamic = "force-static";
 export function GET() {
   const url = (path: string) => `${site.domain}${path}`;
 
+  const md = (path: string) => url(mdPath(path));
+
   const lines: string[] = [
     `# ${site.name}`,
     "",
@@ -18,9 +21,11 @@ export function GET() {
     "",
     "Atende indústrias, frigoríficos, construtoras e loteamentos, empreiteiras, propriedades rurais e empresas que querem reduzir custo de energia. O contato comercial é feito pelo WhatsApp, com levantamento técnico no local antes da proposta.",
     "",
+    `Cada página tem uma cópia em Markdown: acrescente \`index.html.md\` ao endereço (ex.: ${md("/servicos/")}).`,
+    "",
     "## Serviços",
     "",
-    ...services.map((s) => `- [${s.title}](${url(`/servicos/${s.slug}/`)}): ${s.cardSummary} Inclui: ${s.includes.join("; ")}. Aplicações: ${s.applications}`),
+    ...services.map((s) => `- [${s.title}](${url(`/servicos/${s.slug}/`)}): ${s.cardSummary} Inclui: ${s.includes.join("; ")}. Aplicações: ${s.applications} [Markdown](${md(`/servicos/${s.slug}/`)})`),
     "",
   ];
 
@@ -28,7 +33,7 @@ export function GET() {
     lines.push(
       "## Conteúdos técnicos",
       "",
-      ...articles.map((a) => `- [${a.title}](${url(`/conteudos/${a.slug}/`)}): ${a.metaDescription}`),
+      ...articles.map((a) => `- [${a.title}](${url(`/conteudos/${a.slug}/`)}): ${a.metaDescription} [Markdown](${md(`/conteudos/${a.slug}/`)})`),
       "",
     );
   }
@@ -37,7 +42,7 @@ export function GET() {
     "## Empresa e contato",
     "",
     `- [Sobre a Rucad](${url("/sobre/")}): história, estrutura e forma de trabalho.`,
-    `- [Contato](${url("/contato/")}): WhatsApp ${site.phoneDisplay}, e-mail ${site.email}.`,
+    `- [Contato](${url("/contato/")}) ([Markdown](${md("/contato/")})): WhatsApp ${site.phoneDisplay}, e-mail ${site.email}.`,
     `- Endereço: ${site.address}.`,
     `- Área de atendimento: ${site.serviceArea.display}.`,
     `- Horário: ${site.hours.display}.`,

@@ -7,8 +7,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Serviços de engenharia elétrica · Rucad Engenharia`
-- **Meta description:** `Projetos e SPDA, laudos e ensaios, construção de redes e subestações, eficiência energética e usinas solares. Conheça as soluções da Rucad Engenharia.`
+- **Title:** `Serviços de engenharia elétrica em MS · Rucad Engenharia`
+- **Meta description:** `Projetos e SPDA, laudos e ensaios, construção de redes e subestações, eficiência energética e usinas solares. Conheça as soluções da Rucad Engenharia em Campo Grande e MS.`
 - **H1:** Serviços de engenharia elétrica
 - **Palavra-chave principal:** serviços de engenharia elétrica
 
@@ -18,7 +18,7 @@
 
 **H1:** Serviços de engenharia elétrica
 
-**Texto:** Um portfólio completo para quem precisa de energia funcionando com segurança e dentro das normas. Projetamos, executamos e documentamos. Escolha a frente que resolve a sua demanda.
+**Texto:** Um portfólio completo para quem precisa de energia funcionando com segurança e dentro das normas, em Mato Grosso do Sul. Projetamos, executamos e documentamos. Escolha a frente que resolve a sua demanda.
 
 ---
 

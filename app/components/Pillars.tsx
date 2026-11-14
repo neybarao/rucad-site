@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 
 const pillars = [
   { title: "Técnica", body: "Corpo técnico qualificado e equipamentos próprios. Cada obra tem responsável técnico e ART. Sem improviso." },
-  { title: "Confiável", body: "Prazo e responsável definidos desde o dia 1. Entregamos no prazo contratual, muitas vezes antes." },
+  { title: "Confiável", body: "Prazo e responsável definidos desde o dia 1." },
   { title: "Ousada", body: "Enquanto outros param, a Rucad continua. É assim que se constrói referência." },
 ];
 

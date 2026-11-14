@@ -6,8 +6,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Usina Fotovoltaica e Energia Solar · Rucad Engenharia`
-- **Meta description:** `Projeto e implantação de usinas e sistemas fotovoltaicos, do dimensionamento à conexão com a rede. Energia própria com retorno calculado e laudo de UFV.`
+- **Title:** `Usina fotovoltaica em Campo Grande · Rucad Engenharia`
+- **Meta description:** `Projeto e implantação de usinas e sistemas fotovoltaicos em Mato Grosso do Sul, do dimensionamento à conexão com a rede. Energia própria com retorno calculado e laudo de UFV.`
 - **H1:** Usinas e Sistemas Fotovoltaicos (UFV)
 - **Palavra-chave principal:** usina fotovoltaica
 - **Secundárias:** energia solar, projeto fotovoltaico, UFV, instalação de painéis solares, laudo UFV
@@ -72,7 +72,7 @@ O estudo de viabilidade dimensiona a usina pelo seu consumo e traz a estimativa 
 Sim. Fazemos a conexão à rede e a regularização, além do comissionamento e do laudo de UFV.
 
 **Fazem usina para propriedade rural?**
-Sim. Propriedades rurais com consumo alto de irrigação, secagem e refrigeração são casos típicos de bom retorno.
+Sim. Propriedades rurais de MS com consumo alto de irrigação, secagem e refrigeração são casos típicos de bom retorno.
 
 **A usina vem com laudo e ART?**
 Sim. Entregamos o comissionamento com laudo de UFV e a ART do engenheiro responsável.

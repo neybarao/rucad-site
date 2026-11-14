@@ -10,7 +10,7 @@
 
 ## Bloco SEO
 
-- **Title:** `Sobre a Rucad · Empresa de engenharia elétrica`
+- **Title:** `Sobre a Rucad · Empresa de engenharia elétrica em MS`
 - **Meta description:** `A Rucad é uma empresa de engenharia elétrica com corpo técnico qualificado, equipamentos próprios e cultura de entrega no prazo. Conheça a Rucad.`
 - **H1:** Sobre a Rucad Engenharia
 - **Palavra-chave principal:** empresa de engenharia elétrica
@@ -31,32 +31,23 @@
 
 ## Seção 2 · Quem somos
 
-**Texto:** A Rucad nasceu das iniciais dos sócios fundadores, Ruffo, Carvalho e Delatori, e cresceu fazendo engenharia elétrica com rigor. Construímos e mantemos redes de distribuição de baixa e média tensão, subestações, usinas fotovoltaicas e emitimos os laudos e ensaios que comprovam conformidade.
+**Texto:** A Rucad cresceu fazendo engenharia elétrica com rigor. Construímos e mantemos redes de distribuição de baixa e média tensão, subestações, usinas fotovoltaicas e emitimos os laudos e ensaios que comprovam conformidade.
 
-Atendemos de grandes empresas de infraestrutura a produtores rurais, em todo o Brasil. O que se repete em cada obra é a mesma exigência: dado concreto no lugar de promessa, prazo cumprido e responsável técnico do começo ao fim.
+Atendemos de grandes empresas de infraestrutura a produtores rurais, com sede em Campo Grande (MS) e atuação em Mato Grosso do Sul e regiões vizinhas. O que se repete em cada obra é a mesma exigência: dado concreto no lugar de promessa, prazo cumprido e responsável técnico do começo ao fim.
 
-> Nota de revisão: confirmar ano de fundação e composição societária atual antes de publicar.
+> Nota de revisão: sócios e ano de fundação ficam fora do texto até confirmação (ver 00-estrategia-seo.md).
 
 ---
 
 ## Seção 3 · O que nos sustenta (os 3 pilares)
 
-- **Técnica.** Corpo técnico qualificado, CREA ativo e lastro de equipamentos próprios. Cada obra tem responsável técnico e ART.
-- **Confiável.** Prazo e responsável definidos desde o dia 1. Entregamos no prazo contratual, muitas vezes antes. É o que gera a recontratação.
+- **Técnica.** Corpo técnico qualificado e lastro de equipamentos próprios. Cada obra tem responsável técnico e ART.
+- **Confiável.** Prazo e responsável definidos desde o dia 1.
 - **Ousada.** Enquanto outros param, a Rucad continua. Crescimento constante e disposição de desafiar o status quo do setor.
 
 ---
 
-## Seção 4 · Números
-
-Provas concretas, verificáveis.
-
-- **[NÚMERO A CONFIRMAR]+** obras entregues
-- **[NÚMERO A CONFIRMAR]%** de entregas no prazo contratual
-- **[NÚMERO A CONFIRMAR]** anos de atuação
-- **Equipe própria** e equipamentos próprios
-
-> Nota de revisão: preencher com números reais. Evitar "100% de satisfação" genérico; preferir métricas verificáveis (entrega no prazo, fidelização, obras recorrentes).
+<!-- nota: seção de números removida até haver dados confirmados. Não publicar. Ver 00-estrategia-seo.md. -->
 
 ---
 
@@ -68,11 +59,11 @@ Provas concretas, verificáveis.
 
 ## Seção 6 · Diferenciais
 
-- Corpo técnico altamente qualificado, com CREA ativo.
+- Corpo técnico altamente qualificado.
 - Lastro de equipamentos próprios, menos dependência de terceiros.
 - Organização rigorosa de obra, do cronograma à documentação.
 - Cultura de fidelização: clientes que recontratam obra após obra.
-- Atuação em todo o Brasil, com equipe que se desloca até o local.
+- Atuação em Mato Grosso do Sul e regiões vizinhas, com equipe que se desloca até o local.
 
 ---
 

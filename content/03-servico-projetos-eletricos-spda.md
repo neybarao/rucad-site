@@ -6,8 +6,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Projeto Elétrico e SPDA · Rucad Engenharia`
-- **Meta description:** `Projeto elétrico e de SPDA dimensionado por engenheiro, com ART emitida no prazo. Para indústrias, galpões, loteamentos, obras e propriedades rurais.`
+- **Title:** `Projeto elétrico e SPDA em Campo Grande · Rucad Engenharia`
+- **Meta description:** `Projeto elétrico e de SPDA em Campo Grande e MS, dimensionado por engenheiro, com ART emitida no prazo. Para indústrias, galpões, loteamentos, obras e propriedades rurais.`
 - **H1:** Projeto Elétrico e SPDA
 - **Palavra-chave principal:** projeto elétrico
 - **Secundárias:** projeto SPDA, projeto de para-raios, ART projeto elétrico, projeto elétrico industrial
@@ -70,7 +70,7 @@
 Sim. A ART é emitida pelo engenheiro responsável e faz parte da entrega.
 
 **Vocês resolvem a aprovação com a concessionária?**
-Sim. Acompanhamos o processo até a aprovação e a efetivação da ligação, para você não precisar correr atrás.
+Sim. Acompanhamos o processo junto à concessionária até a aprovação e a efetivação da ligação, para você não precisar correr atrás.
 
 **E se o projeto não for aprovado?**
 Projetamos com o dimensionamento correto desde o início justamente para evitar reprovação. Se houver exigência do órgão ou da concessionária, fazemos a adequação como parte do acompanhamento.
@@ -79,7 +79,7 @@ Projetamos com o dimensionamento correto desde o início justamente para evitar 
 Sim. Podemos fazer só o SPDA ou o pacote completo, conforme a sua necessidade.
 
 **Fazem projeto para propriedade rural?**
-Sim. Projeto elétrico rural, dimensionamento de transformador e adequação às normas da concessionária para viabilizar equipamentos e regularizar a instalação.
+Sim, em Mato Grosso do Sul. Projeto elétrico rural, dimensionamento de transformador e adequação às normas da concessionária para viabilizar equipamentos e regularizar a instalação.
 
 **Quanto tempo leva?**
 Depende do porte e da complexidade. Definimos o prazo na proposta, após o levantamento, e ele fica registrado desde o dia 1.

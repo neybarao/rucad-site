@@ -6,8 +6,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Eficiência Energética · Rucad Engenharia`
-- **Meta description:** `Diagnóstico de consumo e gestão estratégica de custos de energia. Reduza a conta e planeje investimentos com dado técnico, não com achismo.`
+- **Title:** `Eficiência energética em Campo Grande · Rucad Engenharia`
+- **Meta description:** `Diagnóstico de consumo e gestão de custos de energia em Campo Grande e MS. Reduza a conta e planeje investimentos com dado técnico, não com achismo.`
 - **H1:** Eficiência Energética
 - **Palavra-chave principal:** eficiência energética
 - **Secundárias:** gestão de energia, redução de custo de energia, diagnóstico energético, gestão de custos de energia
@@ -75,7 +75,7 @@ Não necessariamente. O diagnóstico prioriza as ações de maior retorno. Muita
 Sim. Quando o estudo aponta retorno, a Rucad projeta e implanta a geração fotovoltaica. Veja a página de UFV / Fotovoltaica.
 
 **Serve para propriedade rural?**
-Sim. Propriedades com pivô, secador, silo e ordenha costumam ter consumo alto e boa margem de otimização.
+Sim. Propriedades em MS com pivô, secador, silo e ordenha costumam ter consumo alto e boa margem de otimização.
 
 **Como sei que o investimento vale a pena?**
 O diagnóstico traz estimativa de impacto no custo. Você decide com número na mão, não com promessa.

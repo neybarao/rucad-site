@@ -10,8 +10,8 @@
 
 ## Bloco SEO
 
-- **Title:** `Contato · Rucad Engenharia`
-- **Meta description:** `Fale com a Rucad Engenharia. Levantamento no local e proposta com prazo e responsável técnico definidos. WhatsApp (67) 99650-6767.`
+- **Title:** `Contato Rucad em Campo Grande · Rucad Engenharia`
+- **Meta description:** `Fale com a Rucad Engenharia em Campo Grande, MS. Levantamento no local e proposta com prazo e responsável técnico definidos. WhatsApp (67) 99650-6767.`
 - **H1:** Fale com a Rucad
 - **Palavra-chave principal:** contato Rucad Engenharia
 
@@ -34,10 +34,10 @@
 - **WhatsApp:** (67) 99650-6767 — caminho mais rápido, resposta direta.
 - **Telefone:** (67) 99650-6767
 - **E-mail:** projetos@rucadengenharia.com.br
-- **Endereço:** R. Ucy Nagamine, 538, Campo Grande, MS, 79063-480
+- **Endereço:** Av. Gunter Hans, 3281, Conjunto Aero Rancho, Campo Grande, MS, CEP 79085-108
 - **Horário de atendimento:** [A CONFIRMAR]
 
-> Nota de revisão: confirmar se telefone e WhatsApp são o mesmo número e o horário de atendimento.
+> Nota de revisão: telefone e WhatsApp são o mesmo número (ficha cadastral). Falta confirmar o horário de atendimento.
 
 ---
 
@@ -55,7 +55,7 @@ Reduz o atrito de dar o primeiro passo.
 
 `[MAPA: incorporar localização da sede em Campo Grande, MS]`
 
-**Texto:** Sede em Campo Grande (MS), com atuação em obras em todo o Brasil.
+**Texto:** Sede em Campo Grande (MS), atendendo Mato Grosso do Sul e regiões vizinhas.
 
 ---
 
