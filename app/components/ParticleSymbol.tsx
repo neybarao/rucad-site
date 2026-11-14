@@ -242,8 +242,11 @@ export default function ParticleSymbol() {
 
       // luz de lâmpada atrás do símbolo, pulsando junto com as partículas
       const lamp = reduceMotion ? 0.7 : 0.6 + 0.4 * (0.5 + 0.5 * Math.sin(t * 2.4));
-      const lr = VIEW_W * box.s * 0.75;
-      const lg = ctx!.createRadialGradient(cx, cy - box.s * 4, 0, cx, cy - box.s * 4, lr);
+      // o raio da luz não passa da borda mais próxima do canvas: assim ela some
+      // por completo antes da borda e não aparece cortada em linha reta
+      const ly = cy - box.s * 4;
+      const lr = Math.max(1, Math.min(VIEW_W * box.s * 0.75, cx, W - cx, ly, H - ly));
+      const lg = ctx!.createRadialGradient(cx, ly, 0, cx, ly, lr);
       lg.addColorStop(0, `rgba(185,215,255,${0.24 * lamp * ease})`);
       lg.addColorStop(0.6, `rgba(130,180,255,${0.09 * lamp * ease})`);
       lg.addColorStop(1, "rgba(100,150,255,0)");

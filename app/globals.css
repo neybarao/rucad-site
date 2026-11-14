@@ -575,16 +575,23 @@ html.no-scroll body {
   width: 100%;
 }
 
-/* Hero com ilustração (modelo 3D) no lado direito */
+/* Hero com ilustração (modelo 3D) no lado direito.
+   A ilustração ocupa os 48% da direita da tela. A coluna de texto vai da margem
+   do .wrap até 2rem antes dela. (Um padding-right em % seria calculado sobre a
+   largura da tela e espremia o texto em monitores largos.) */
 .hero--visual .hero__inner {
-  padding-right: 40%;
   pointer-events: none; /* deixa o cursor chegar no modelo atrás */
+  --hero-text-col: calc(52vw - 2rem - max(var(--gutter), (100vw - var(--wrap)) / 2 + var(--gutter)));
 }
 
 /* título menor que o hero padrão para caber 2 a 3 linhas na coluna da esquerda */
 .hero--visual .hero__title {
   font-size: clamp(2.5rem, 3.4vw, 3.1rem);
-  max-width: 22ch;
+  max-width: min(22ch, var(--hero-text-col));
+}
+
+.hero--visual .hero__subtitle {
+  max-width: min(48ch, var(--hero-text-col));
 }
 
 .hero--visual .hero__inner > * {
@@ -601,10 +608,11 @@ html.no-scroll body {
 }
 
 /* gradiente do azul do hero para um azul mais claro atrás do modelo.
-   Fica no fundo do hero inteiro para o raio grande não ser cortado. */
+   closest-side: a elipse chega a transparente antes da borda direita e do pé
+   do hero, então o degradê sempre termina no azul de fundo. */
 .hero--visual {
   background:
-    radial-gradient(ellipse 62% 95% at 76% 58%, rgba(20, 103, 204, 0.45) 0%, rgba(16, 80, 158, 0.24) 42%, rgba(6, 33, 65, 0) 78%),
+    radial-gradient(closest-side at 76% 56%, rgba(20, 103, 204, 0.45) 0%, rgba(16, 80, 158, 0.24) 45%, rgba(6, 33, 65, 0) 100%),
     var(--bg-dark);
 }
 
@@ -712,7 +720,7 @@ html.no-scroll body {
   }
 
   .hero--visual .hero__inner {
-    padding-right: var(--gutter);
+    --hero-text-col: 100%;
   }
 
   .hero__visual {
@@ -742,7 +750,7 @@ html.no-scroll body {
 
   .hero--visual {
     background:
-      radial-gradient(ellipse 110% 50% at 50% 82%, rgba(20, 103, 204, 0.45) 0%, rgba(16, 80, 158, 0.24) 42%, rgba(6, 33, 65, 0) 78%),
+      radial-gradient(ellipse 75% 26% at 50% 74%, rgba(20, 103, 204, 0.45) 0%, rgba(16, 80, 158, 0.24) 45%, rgba(6, 33, 65, 0) 100%),
       var(--bg-dark);
   }
 

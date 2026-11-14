@@ -40,8 +40,11 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE.url] },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/logo-rucad-512.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
   formatDetection: { telephone: false },
 };
