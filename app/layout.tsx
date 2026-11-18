@@ -10,6 +10,9 @@ import { site } from "@/content/site-data";
 import { services } from "@/content/services";
 import { ORG_ID, WEBSITE_ID, DEFAULT_OG_IMAGE, LOGO_URL, absoluteUrl } from "@/lib/seo";
 
+// ID de medição do Google Analytics 4 (fluxo web de rucadengenharia.com.br)
+const GA_ID = "G-06LN2VLVMW";
+
 const anek = Anek_Latin({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -138,6 +141,16 @@ const orgLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className={`${anek.variable} ${dmSans.variable}`}>
+      <head>
+        {/* Google tag (gtag.js), GA4. O Google pede a tag logo depois de <head> em todas as páginas;
+            como este layout envolve o site inteiro, ela entra em todas. */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`,
+          }}
+        />
+      </head>
       <body>
         {/* antes da primeira pintura: tela de abertura só na 1ª página da visita */}
         <script
